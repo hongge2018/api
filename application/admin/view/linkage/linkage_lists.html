@@ -1,0 +1,38 @@
+{include file="common/header" /}
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> <a href='javascript:;' class="on"><em>联动菜单</em></a><span>|</span><a href='{:url('linkage_add',['keyid'=>$keyid])}'><em>添加菜单</em></a> </div>
+</div>
+<form name="myform" action="{:url('listorder',['keyid'=>$keyid])}" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="10%">排序</th>
+            <th width="10%">ID</th>
+            <th width="10%" align="left" >菜单名称</th>
+            <th width="20%">菜单描述</th>
+            <th width="15%">管理操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          {volist name="list" id="vo"}
+            <tr>
+              <td align='center' width='80'><input name='listorders[{$vo.linkageid}]' type='text' size='3' value='{$vo.listorder}' class='input-text-c'></td>
+              <td align='center' width='100'>{$vo.linkageid}</td>
+              <td>{$vo.name}</td>
+              <td>{$vo.description}</td>
+              <td align='center'>{eq name="vo['is_have_child']" value="1"}<a href="{:url('linkage_lists',['keyid'=>$vo['keyid'],'parentid'=>$vo['linkageid']])}">管理子菜单</a> | {/eq}
+                <a href="{:url('linkage_add',['id'=>$vo['linkageid'],'keyid'=>$keyid])}">添加子菜单</a> | <a href="{:url('linkage_edit',['id'=>$vo['linkageid'],'parentid'=>$vo['parentid']])}">修改</a> | <a href="javascript:confirmurl('{:url('linkage_delete',['id'=>$vo['linkageid']])}', '是否删除菜单?')">删除</a></td>
+            </tr>
+          {/volist}
+        </tbody>
+      </table>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="排序" />
+      </div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

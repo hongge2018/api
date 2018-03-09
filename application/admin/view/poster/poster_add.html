@@ -1,0 +1,52 @@
+{include file="common/header" /}
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> <a href='{:url('poster_lists',array('spaceid'=>$spaceid))}'><em>广告列表</em></a><span>|</span><a href='javascript:;' class="on"><em>添加广告</em></a> </div>
+</div>
+</div>
+<form name="myform" id="myform" action="" method="post">
+  <table width="100%" class="table_form contentWrap">
+    <tr>
+      <th>广告标题：</th>
+      <td><input type="text" name="name" id="name" class="input-text" style="width:500px;" value=""></td>
+    </tr>
+    <tr>
+      <th>链接地址：</th>
+      <td><input type="text" name="url" id="url" class="input-text" style="width:500px;" value=""></td>
+    </tr>
+    <tr>
+      <th>文字提示：</th>
+      <td><input type="text" name="remark" id="remark" class="input-text" style="width:500px;" value=""></td>
+    </tr>
+    <tr>
+      <th>图片：</th>
+      <td>{:input_thumb()}</td>
+    </tr>
+    <tr>
+      <th>开始时间：</th>
+      <td>{:input_calendar('startdate')}</td>
+    </tr>
+    <tr>
+      <th>结束时间：</th>
+      <td>{:input_calendar('enddate',['is_load'=>0])}</td>
+    </tr>
+    <tr>
+      <th>是否显示：</th>
+      <td><p>
+        <label>
+          <input name="display" type="checkbox" id="display_0" value="1" checked="checked" />
+          </label>
+        <br />
+        
+      </p></td>
+    </tr>
+  </table>
+  <!--table_form_off-->
+  </div>
+  <div class="bk15"></div>
+  <div class="btn">
+    <input name="spaceid" type="hidden" value="{$spaceid}" />
+    <input type="submit" id="dosubmit" class="button" name="dosubmit" value="提交"/>
+  </div>
+  </div>
+</form>
+</body></html>

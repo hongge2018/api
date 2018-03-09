@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<title>图片上传</title>
+<style>
+body{margin:0;padding:0;}
+html{font-size:62.5%;}
+*{padding:0px;margin:0px;-webkit-box-sizing:content-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+li{list-style:none}
+table{border-collapse:collapse;border-spacing:0;}
+select, input{-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+a{text-decoration: none;color:#333333;}
+html, body, .wrap{height: 100%;}
+.album-old{width: 100%;height: 120px;z-index: 1;margin-top: 5px;margin-right: auto;margin-left: 5px;padding: 3px;}
+.upload-btn{width: 119px;height: 44px;background-image: url(__IMG__/upload/layupload.png);float: left;}
+.upload-btn input{width: 100%;height: 100%;opacity: 0;}
+.infos{position: absolute;height: 44px;left:138px;line-height: 22px;}
+.upload-img.loading{background:url(__IMG__/upload/loading.gif) no-repeat center;}
+.album-old .upload-img{position: absolute;width: 85%;max-height:200px;max-width:200px;top:60px;clear: both;z-index: 1;overflow: hidden;text-align: center;}
+.album-old .upload-img img{width: 100%;border: 1px solid #666;padding: 2px;margin-right: auto;margin-left: auto;}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+  <div class="album-old">
+      <div class="upload-btn btn-old">
+        <input type="file" accept="image/*" capture="camera" class="upload" id="fileupdate" value="" onChange="SaveFile()">
+      </div>
+       <div class="infos">
+        最多上传<font color="red"> 1</font> 个附件,单文件最大 <font color="red">8 MB</font>
+        <div class="bk3"></div>
+        支持 <font style="font-family: Arial, Helvetica, sans-serif">{$ext}</font> 格式
+      </div>
+    <div class="upload-img" id="upload-img"></div>
+    <input id="filename" name="filename" type="hidden" value="" />
+  </div>
+</div>
+<script>
+
+//调用的时候这样写
+function SaveFile() {
+    //获取上传控件对象
+    var file = document.getElementById('fileupdate').files[0];
+    //创建其他参数键值对数组，key是变量名，value是变量值
+    var KeyValue = [{ 'key': 'ext', 'value': '{$ext}' }, { 'key': 'Test2', 'value': '测试2' }];
+    //参数：上传控件file的对象,其他参数的键值对，过程中事件，完成后事件，意外错误事件，用户取消事件，action（控制器）
+    MySaveFile(file, KeyValue, uploadProgress, uploadComplete, null, null, "{:url('delete')}");
+}
+
+//微信端异步上传文件
+function SaveFileForWx(file, ProgressMethod, LoadMethod, ErrorMethod, AbortMethod) {
+    MySaveFile(file, null, ProgressMethod, LoadMethod, ErrorMethod, AbortMethod);
+}
+
+//上传文件的方法，使用原生file
+//参数：上传控件file的对象,其他参数的键值对，过程中事件，完成后事件，意外错误事件，用户取消事件，action（控制器）
+function MySaveFile(file, KeyValue, ProgressMethod, LoadMethod, ErrorMethod, AbortMethod) {
+    var fd = new FormData();
+    fd.append("filedate", file); //加载上传文件
+    //遍历键值对加载其他参数
+    if (KeyValue != null) {
+        for (var i = 0; i < KeyValue.length; i++) {
+            fd.append(KeyValue[i].key, KeyValue[i].value);
+        }
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.upload.addEventListener("progress", ProgressMethod, false); //过程中
+    xhr.addEventListener("load", LoadMethod, false); //完成后事件
+    xhr.addEventListener("error", ErrorMethod, false); //上传错误事件
+    xhr.addEventListener("abort", AbortMethod, false); //上传已由用户或浏览器取消、删除连接.
+    xhr.open("POST", "{:url('weixin_upload_img')}"); // "/Index/SaveFile"
+    xhr.send(fd);
+}
+
+///一些事件的案例
+
+////调用的时候这样写
+//function SaveFile() {
+//    //获取上传控件对象
+//    var file = document.getElementById('fileupdate').files[0];
+//    //创建其他参数键值对数组，key是变量名，value是变量值
+//    var KeyValue = [{ 'key': 'Test1', 'value': '测试1' }, { 'key': 'Test2', 'value': '测试2' }];
+//    //参数：上传控件file的对象,其他参数的键值对，过程中事件，完成后事件，意外错误事件，用户取消事件，action（控制器）
+//    MySaveFile(file, KeyValue, null, uploadComplete, null, null, "/Index/SaveFile");
+//}
+
+//过程中事件
+function uploadProgress(evt) {
+    if (evt.lengthComputable) {
+        //计算已上传的数据的占比，用于展示进度条
+        //var percentComplete = Math.round(evt.loaded * 100 / evt.total);
+		document.getElementById('upload-img').innerHTML='<img id="thumb_src" src="__IMG__/upload/loading_weixin_reg.gif">';
+    }
+    else {
+        alert('无法计算');
+    }
+}
+//
+//
+//上传完成后的事件
+function uploadComplete(evt) {
+    /* 获取服务器返回数据*/
+    var message = evt.target.responseText;//获取服务器返回的值
+	var res=eval('('+message+')'); 
+	if(res.code==1){
+		var pic_url='/uploads/'+ res.data.src;
+		document.getElementById('upload-img').innerHTML='<img id="thumb_src" src="'+pic_url+'">';
+		document.getElementById("filename").value =res.data.src;
+	}else{
+		alert(res.msg);
+	}
+	
+}
+//
+//
+////上传出错时触发
+//function uploadFailed(evt) {
+//    alert("上传出错.");
+//}
+//
+//
+////上传链接取消时触发
+//function uploadCanceled(evt) {
+//    alert("上传已由用户或浏览器取消删除连接.");
+//}
+</script>
+</body>
+</html>

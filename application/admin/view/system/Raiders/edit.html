@@ -1,0 +1,162 @@
+<include file="Public/header" />
+<form name="myform" id="myform" action="" method="post">
+  <table width="100%" class="table_form contentWrap">
+    <tr>
+      <th width="150">标题：</th>
+      <td><input type="text" name="title" id="title" class="input-text" style="width:500px;" value="{$title}"></td>
+    </tr>  
+    <tr>
+      <th>出发地：</th>
+      <td><select name="chu_area" style="width:200px;" required id="chu_area">
+          <option value="">请选择出发地</option>
+          <?php echo $select_chufa;?>
+      </select></td>
+    </tr>
+     
+    <tr>
+      <th>目的地：</th>
+      <td><select name="mudi_area" style="width:200px;" required id="mudi_area" onchange="get_hotelid()">
+          <option value="">请选择目的地</option>
+          <?php echo $select_mudi;?>
+      </select></td>
+    </tr> 
+    <tr>
+      <th>所住酒店：</th>
+      <td><select name="hotelid" style="width:200px;" required id="hotelid">
+          <option value="0">请选择酒店</option>     
+      </select></td>
+    </tr> 
+    <tr>
+      <th>缩略图：</th>
+      <td><input type='hidden' name='thumb' id='thumb' value='{$thumb}'>
+        <a href='javascript:void(0);' onclick="open_thumb('{:U('Attachment/Plupload/plupload')}', '缩略图');return false;"> 
+        <img src='<empty name="thumb">__IMG__/icon/upload-pic.png<else/>__ROOT__/Uploads/{$thumb}</empty>' id='thumb_preview' width='135' height='113' style='cursor:hand;' /></a></td>
+    </tr>    
+     <tr>
+      <th>出发时间：</th>
+      <td><link rel="stylesheet" type="text/css" href="__JS__/calendar/jscal2.css"/>
+			<link rel="stylesheet" type="text/css" href="__JS__/calendar/border-radius.css"/>
+			<link rel="stylesheet" type="text/css" href="__JS__/calendar/win2k.css"/>
+			<script type="text/javascript" src="__JS__/calendar/calendar.js"></script>
+		<script type="text/javascript" src="__JS__/calendar/lang/en.js"></script>
+            <input type="text" name="departure_time" id="departure_time" value="{$departure_time|date="Y-m-d",###}" size="10" class="date" readonly>&nbsp;
+	   <script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: true,
+		    inputField : "departure_time",
+		    trigger    : "departure_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script></td>
+    </tr>        
+    
+     <tr>
+      <th>出发天数：</th>
+      <td><input type="text" name="days" id="days" class="input-text" value="{$days}"> 天</td>
+    </tr>  
+      <tr>
+      <th>人物：</th>
+      <td><input type="text" name="renwu" id="renwu" class="input-text" style="width:500px;" value="{$renwu}"></td>
+    </tr>
+      <tr>
+      <th>人均花费：</th>
+      <td><input type="text" name="per_spend" id="per_spend" class="input-text" value="{$per_spend}"> 元</td>
+    </tr>    
+    <tr>
+      <th>任性前言：</th>
+      <td><link rel="stylesheet" href="__JS__/kindeditor/themes/default/default.css" />
+        <script charset="utf-8" src="__JS__/kindeditor/kindeditor-min.js"></script> 
+        <script charset="utf-8" src="__JS__/kindeditor/lang/zh_CN.js"></script> 
+        <script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="preface"]', {allowFileManager : true,uploadJson : '{:U('Attachment/Plupload/editor_upload')}',extraFileUploadParams: {session_id : '{:session_id()}'}});
+			});
+		</script>
+      <textarea name="preface" cols="100" rows="20" id="preface">{$preface}</textarea></td>
+    </tr>
+    <tr>
+      <th>关于行程：</th>
+      <td><script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="tour"]', {allowFileManager : true,uploadJson : '{:U('Attachment/Plupload/editor_upload')}',extraFileUploadParams: {session_id : '{:session_id()}'}});
+			});
+		</script>
+      <textarea name="tour" cols="100" rows="20" id="tour">{$tour}</textarea></td>
+    </tr>
+    <tr>
+      <th>行前准备：</th>
+      <td><script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="ready"]', {allowFileManager : true,uploadJson : '{:U('Attachment/Plupload/editor_upload')}',extraFileUploadParams: {session_id : '{:session_id()}'}});
+			});
+		</script>
+      <textarea name="ready" cols="100" rows="20" id="ready">{$ready}</textarea></td>
+    </tr>
+     <tr>
+      <th>关于购物：</th>
+      <td><script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="shoping"]', {allowFileManager : true,uploadJson : '{:U('Attachment/Plupload/editor_upload')}',extraFileUploadParams: {session_id : '{:session_id()}'}});
+			});
+		</script>
+      <textarea name="shoping" cols="100" rows="20" id="shoping">{$shoping}</textarea></td>
+    </tr>
+       
+     <tr>
+      <th>关于交通：</th>
+      <td><script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="jiaotong"]', {allowFileManager : true,uploadJson : '{:U('Attachment/Plupload/editor_upload')}',extraFileUploadParams: {session_id : '{:session_id()}'}});
+			});
+		</script>
+      <textarea name="jiaotong" cols="100" rows="20" id="jiaotong">{$jiaotong}</textarea></td>
+    </tr>
+     <tr>
+      <th>特殊民俗：</th>
+      <td><script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="folk"]', {allowFileManager : true,uploadJson : '{:U('Attachment/Plupload/editor_upload')}',extraFileUploadParams: {session_id : '{:session_id()}'}});
+			});
+		</script>
+      <textarea name="folk" cols="100" rows="20" id="folk">{$folk}</textarea></td>
+    </tr>      
+    
+    <tr>
+      <th>关于花费：</th>
+      <td><script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="spend"]', {allowFileManager : true,uploadJson : '{:U('Attachment/Plupload/editor_upload')}',extraFileUploadParams: {session_id : '{:session_id()}'}});
+			});
+		</script>
+      <textarea name="spend" cols="100" rows="20" id="spend">{$spend}</textarea></td>
+    </tr>
+  </table>
+  <!--table_form_off-->
+  </div>
+  <div class="bk15"></div>
+  <div class="btn">
+  <input name="id" type="hidden" value="{$id}" />
+    <input type="submit" id="dosubmit" class="button" name="dosubmit" value="提交"/>
+  </div>
+  </div>
+</form>
+<script>
+ get_hotelid();
+ function get_hotelid() {		
+	var linkageid = $("#mudi_area option:selected").val();
+	$.post('{:U('get_hotelid')}',{linkageid:linkageid,hotelid:{$hotelid}}, function (data) {
+		$('#hotelid').html(data);         
+	})
+}
+</script>
+</body></html>

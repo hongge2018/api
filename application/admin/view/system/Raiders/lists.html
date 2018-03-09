@@ -1,0 +1,90 @@
+<include file="Public/header" />
+<div id="searchid">
+  <form name="searchform" action="" method="post" >
+    <table width="100%" cellspacing="0" class="search-form">
+      <tbody>
+        <tr>
+          <td><div class="explain-col"> 时间：
+              <link rel="stylesheet" type="text/css" href="__JS__/calendar/jscal2.css"/>
+              <link rel="stylesheet" type="text/css" href="__JS__/calendar/border-radius.css"/>
+              <link rel="stylesheet" type="text/css" href="__JS__/calendar/win2k.css"/>
+              <script type="text/javascript" src="__JS__/calendar/calendar.js"></script> 
+              <script type="text/javascript" src="__JS__/calendar/lang/en.js"></script>
+              <input type="text" name="start_time" id="start_time" value="" size="10" class="date" readonly>
+              &nbsp;<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "start_time",
+		    trigger    : "start_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>- &nbsp;
+              <input type="text" name="end_time" id="end_time" value="" size="10" class="date" readonly>
+              &nbsp;<script type="text/javascript">
+			Calendar.setup({
+			weekNumbers: false,
+		    inputField : "end_time",
+		    trigger    : "end_time",
+		    dateFormat: "%Y-%m-%d",
+		    showTime: false,
+		    minuteStep: 1,
+		    onSelect   : function() {this.hide();}
+			});
+        </script>
+              <select name="searchtype">
+                <option value='title' selected>标题</option>
+                <option value='days'>天数</option>
+              </select>
+              <input name="keyword" type="text" value="" class="input-text" />
+              <input type="submit" name="search" class="button" value="搜索" />
+            </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+<form name="myform" action="" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="100">id</th>
+            <th>排序</th>
+            <th>出发地</th>
+            <th>目的地</th>
+            <th>标题</th>
+            <th>天数</th>
+            <th>要均费用</th>
+            <th width="120">时间</th>
+            <th width="100">管理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="list" id="vo">
+            <tr>
+              <td align='center'>{$vo.id}</td>
+              <td align='center'><input name='listorders[{$vo.id}]' type='text' size='3' value='{$vo.listorder}' class='input-text-c'></td>
+              <td >{$chuCache[$vo['chu_area']]['name']}</td>
+              <td >{$miduCache[$vo['mudi_area']]['name']}</td>
+              <td >{$vo.title}</td>
+              <td >{$vo.days} 天</td>
+              <td >{$vo.per_spend}</td>
+              <td >{$vo.inputtime|date="Y-m-d H:i:s",###}</td>
+              <td align='center'><a href="{:U('edit',array('id'=>$vo['id'],'menuid'=>$menuid))}">修改</a> | <a href="{:U('delete',array('id'=>$vo['id'],'menuid'=>$menuid))}">删除</a></td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="btn">
+        <input type="button" class="button" value="排序" onclick="myform.action='{:U('listorder')}';myform.submit();"/>
+      </div>
+      <div id="pages"> {$page} </div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

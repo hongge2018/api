@@ -1,0 +1,92 @@
+<?php if (!defined('IN_ZZCMS')) exit(); ?>
+<include file="Public/header" />
+<style type="text/css">
+html {
+	_overflow-y:scroll
+}
+</style>
+
+<form action="" method="post" id="myform">
+  <div class="pad-10">
+    <div class="col-tab">
+      <ul class="tabBut cu-li">
+        <li id="tab_setting_1" class="on" onClick="SwapTab('setting','on','',2,1);">基本配置</li>
+        <li id="tab_setting_2" onClick="SwapTab('setting','on','',2,2);">联系方式</li>
+      </ul>
+      <div id="div_setting_1" class="contentList pad-10">
+        <table width="100%"  class="table_form">
+          <tr>
+            <th width="120">网站名字</th>
+            <td class="y-bg"><input name="site_name" type="text" class="input-text" id="site_name" value="{$site_name}" size="50"/>
+              &nbsp;</td>
+          </tr>
+          <tr>
+            <th width="120">关键词</th>
+            <td class="y-bg"><input name="site_keywords" type="text" class="input-text" id="site_keywords" value="{$site_keywords}" size="50" /></td>
+          </tr>
+          <tr>
+            <th width="120">描述</th>
+            <td class="y-bg"><input name="site_description" type="text" class="input-text" id="site_description" value="{$site_description}" size="50"/></td>
+          </tr>
+          <tr>
+            <th width="120">工作时间</th>
+            <td class="y-bg"><input name="site_worktime" type="text" class="input-text" id="site_worktime" value="{$site_worktime}" size="50" /></td>
+          </tr>
+          <tr>
+            <th width="120">备案信息</th>
+            <td class="y-bg"><input name="site_icp" type="text" class="input-text" id="site_icp" value="{$site_icp}" size="50" /></td>
+          </tr>
+        </table>
+      </div>
+      <div id="div_setting_2" class="contentList pad-10 hidden">
+        <table width="100%"  class="table_form">
+          <tr>
+            <th width="120">客服电话</th>
+            <td class="y-bg"><input name="site_phone" type="text" class="input-text" id="site_phone" value="{$site_phone}" size="50" /></td>
+          </tr>
+          <tr>
+            <th width="120">客服微信</th>
+            <td class="y-bg"><input name="site_weixin" type="text" class="input-text" id="site_weixin" value="{$site_weixin}" size="50" /></td>
+          </tr>
+          <tr>
+            <th width="120">意见建议</th>
+            <td class="y-bg"><input name="site_forever" type="text" class="input-text" id="site_forever" value="{$site_forever}" size="50" /></td>
+          </tr>
+        </table>
+      </div>
+      <div class="bk15"></div>
+      <input name="id" type="hidden" value="{$id}" />
+      <input name="dosubmit" type="submit" value="提交" class="button">
+    </div>
+  </div>
+</form>
+</body><script type="text/javascript">
+
+function SwapTab(name,cls_show,cls_hide,cnt,cur){
+    for(i=1;i<=cnt;i++){
+		if(i==cur){
+			 $('#div_'+name+'_'+i).show();
+			 $('#tab_'+name+'_'+i).attr('class',cls_show);
+		}else{
+			 $('#div_'+name+'_'+i).hide();
+			 $('#tab_'+name+'_'+i).attr('class',cls_hide);
+		}
+	}
+}
+
+function showsmtp(obj,hiddenid){
+	hiddenid = hiddenid ? hiddenid : 'smtpcfg';
+	var status = $(obj).val();
+	if(status == 1) $("#"+hiddenid).show();
+	else  $("#"+hiddenid).hide();
+}
+function test_mail() {
+	var mail_type = $('input[checkbox=mail_type][checked]').val();
+	var mail_auth = $('input[checkbox=mail_auth][checked]').val();
+    $.post('?m=admin&c=setting&a=public_test_mail&mail_to='+$('#mail_to').val(),{mail_type:mail_type,mail_server:$('#mail_server').val(),mail_port:$('#mail_port').val(),mail_user:$('#mail_user').val(),mail_password:$('#mail_password').val(),mail_auth:mail_auth,mail_from:$('#mail_from').val()}, function(data){
+	alert(data);
+	});
+}
+
+</script>
+</html>

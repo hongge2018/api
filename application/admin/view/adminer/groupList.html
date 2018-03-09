@@ -1,0 +1,117 @@
+{include file="common/header" /}
+<div class="pad_10">
+    <div class="table-list">
+        <button class="layui-btn publish" data-url="{:url('groupPublish')}">新增</button>
+        <table class="layui-table" lay-even="">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>用户名</th>
+                <th>添加时间</th>
+                <th>修改时间</th>
+                <th>管理操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="lists" id="vo"}
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.title}</td>
+                <td>{:formatTime($vo.create_time)}</td>
+                <td>{:formatTime($vo.update_time)}</td>
+                <td align="center">
+                    <div class="layui-btn-group">
+                        <button class="layui-btn layui-btn-sm set-auth"
+                                data-url="{:url('groupAuth',['id'=>$vo['id']])}">设置权限
+                        </button>
+                        <button class="layui-btn layui-btn-sm publish"
+                                data-url="{:url('groupPublish',['id'=>$vo['id'],'menuid'=>$menuid])}">修改
+                        </button>
+                        <button class="layui-btn layui-btn-sm layui-btn-danger delete" data-id="{$vo.id}">删除</button>
+                    </div>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    layui.use(['table', 'layer', 'jquery', 'form'], function () {
+        var table = layui.table,
+                layer = layui.layer,
+                form = layui.form,
+                $ = layui.$;
+
+        //新增或者修改
+        $('.publish').click(function () {
+            layer.open({
+                type: 2,
+                title: '用户组管理',
+                shadeClose: true,
+                shade: 0.8,
+                area: ['500px', '230px'],
+                content: $(this).data('url')
+            });
+        })
+
+        /**
+         * 设置用户权限
+         */
+        $('.set-auth').click(function () {
+            layer.open({
+                type: 2,
+                title: '设置用户组管理',
+                btn: ['全选', '取消', '提交'],
+                shadeClose: true,
+                shade: 0.8,
+                area: ['50%', '80%'],
+                content: $(this).data('url')
+                , yes: function (index, layero) {
+                    //按钮【按钮一】的回调
+                }
+                , btn2: function (index, layero) {
+                    //获取弹出窗口对象
+                    var body = layer.getChildFrame('body', index);
+                    var roleid = body.find('input[name="roleid"]').val();
+                    console.log(roleid+'哈哈')
+
+                    body.find('input[type="checkbox"]').each(function () {
+                        if ($(this).is(':checked')) {
+                            console.log($(this).val());
+                        }
+
+                    })
+
+                    return false;
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+                , btn3: function (index, layero) {
+                    //按钮【按钮三】的回调
+                    return false;
+                    //return false 开启该代码可禁止点击该按钮关闭
+                }
+            });
+        })
+
+        $('.delete').click(function () {
+            var id = $(this).data('id');
+            $.post('{:url('
+            groupDelete
+            ')}', {id: id}, function (res) {
+                if (res.code == 1) {
+                    layer.msg(res.msg);
+                    $('#tr' + id).remove();
+                } else {
+                    layer.msg(res.msg);
+                }
+            }
+            )
+            ;
+        })
+
+
+    })
+</script>
+</body></html>

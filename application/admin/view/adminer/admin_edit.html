@@ -1,0 +1,50 @@
+{include file="common/header" /}
+<div class="subnav" ><div class="content-menu ib-a blue line-x"><a href='javascript:;' class="on"><em>修改</em></a></div ></div ><style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+      <table width="100%" class="table_form contentWrap">
+        <tr>
+          <td width="80">用户名</td>
+          <td>{$username}</td>
+        </tr>
+        <tr>
+          <td width="80">最后登录时间</td>
+          <td>{$lastlogintime|date="Y-m-d h:i:s",###}</td>
+        </tr>
+        <tr>
+          <td width="80">最后登录IP</td>
+          <td>{$lastloginip}</td>
+        </tr>
+         <tr>
+          <td width="80">角色组</td>
+          <td><select name="roleid" id="roleid" >
+              {volist name="rulelist" id="data"}
+              <option value='{$data.id}' {eq name="data['id']" value="$roleid"}selected{/eq}>{$data.title}</option>
+              {/volist}   
+            </select></td>
+        </tr>
+        <tr>
+          <td>真实姓名</td>
+          <td><input type="text" name="realname" id="realname" class="input-text" size="30" value="{$realname}">
+            </input></td>
+        </tr>
+           <tr>
+          <td width="80">密码</td>
+          <td><input type="password" name="password" id="password" class="input-text" size="30" value=""></td>
+        </tr>
+        <tr>
+          <td>E-mail</td>
+          <td><input type="text" name="email" id="email" class="input-text" size="30" value="{$email}">
+            </input></td>
+        </tr>
+      </table>
+      <div class="bk15"></div>
+      <input name="userid" type="hidden" id="userid" value="{$userid}">
+      <input name="dosubmit" type="submit" value="提交" class="button" id="dosubmit">
+    </form>
+  </div>
+</div>
+</body></html>

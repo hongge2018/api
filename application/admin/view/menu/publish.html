@@ -1,0 +1,118 @@
+{include file="common/header" /}
+<div style="margin: 15px;">
+
+	<fieldset class="layui-elem-field">
+		<legend> 菜单管理 - {present name="id"}修改{else/}新增{/present}菜单</legend>
+		<div class="layui-field-box">
+			<form class="layui-form" action="">
+				<div class="layui-form-item">
+					<label class="layui-form-label">上级菜单</label>
+					<div class="layui-input-block">
+						<select name="parentid" lay-filter="aihao">
+							<option value="0" {notpresent name="parentid"}selected{/notpresent}>请选择</option>
+							{$select_categorys}
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">名称</label>
+					<div class="layui-input-block">
+						<input type="text" name="name" placeholder="请输入名称" lay-verify="name" class="layui-input" value="{present name="name"}{$name}{/present}">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">模块名</label>
+					<div class="layui-input-block">
+						<input type="text" name="app" placeholder="请输入模块名" lay-verify="app" class="layui-input" value="{present name="app"}{$app}{/present}">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">文件名</label>
+					<div class="layui-input-block">
+						<input type="text" name="controller" placeholder="请输入文件名" lay-verify="controller" class="layui-input" value="{present name="controller"}{$controller}{/present}">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">方法名</label>
+					<div class="layui-input-inline">
+						<input type="text" name="action" placeholder="请输入方法名" lay-verify="action" class="layui-input" value="{present name="action"}{$action}{/present}">
+					</div>
+					<div class="layui-form-mid layui-word-aux">通过AJAX 传递的方法，请使用 ajax_开头</div>
+				</div>
+				<!--<div class="layui-form-item">
+					<label class="layui-form-label">是否显示</label>
+					<div class="layui-input-block">
+						<input type="checkbox" name="display" value="1" lay-skin="switch" lay-text="显示|隐藏">
+					</div>
+				</div>-->
+
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						{present name="id"}<input type="hidden" name="id" id="id" value="{$id}" />{/present}
+						<button class="layui-btn" lay-submit lay-filter="admin_form">立即提交</button>
+						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</fieldset>
+</div>
+	<script type="text/javascript" src="__JS__/layui/layui.js"></script>
+<script>
+	
+	
+	layui.use(['form', 'layedit', 'laydate','layer','jquery'], function() {
+		var form = layui.form,
+			layer = layui.layer,
+			$ = layui.$;
+		//渲染表彰
+		form.render(); 
+	
+		//自定义验证规则
+		form.verify({
+			name: function(value) {
+				if(value.length < 2) {
+					return '名称不能最少为2个字符';
+				}
+			},
+			app: function(value) {
+				if(value.length < 1) {
+					return '模块名不能为空';
+				}
+			},	
+			controller: function(value) {
+				if(value.length < 1) {
+					return '文件名不能为空';
+				}
+			},
+			action: function(value) {
+				if(value.length < 1) {
+					return '方法名不能为空';
+				}
+			},
+		});
+
+
+		//监听提交
+		form.on('submit(admin_form)', function(res) {			
+			$.ajax({
+			   type: "POST",
+			   url: "{:url('publish')}",
+			   data: res.field,
+			   success: function(msg){		
+			   	 	if( msg.code == 1 ){
+		                parent.location.reload();
+		            }else{
+		                parent.layer.msg(msg.msg);		
+		            }
+			   }
+			});
+			return false;
+		});
+
+	});
+</script>
+
+</body>
+
+</html>

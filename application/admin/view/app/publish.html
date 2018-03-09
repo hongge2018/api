@@ -1,0 +1,93 @@
+{include file="common/header" /}
+<div style="margin: 15px;">
+	<fieldset class="layui-elem-field">
+		<legend> 菜单管理 - {present name="id"}修改{else/}新增{/present}应用</legend>
+		<div class="layui-field-box">
+			<form class="layui-form" action="">
+				<div class="layui-form-item">
+					<label class="layui-form-label">应用名称</label>
+					<div class="layui-input-block">
+						<input type="text" name="app_name" placeholder="请输入名称" lay-verify="name" class="layui-input" value="{present name="app_name"}{$app_name}{/present}">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">AppId</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input w300" value="{$app_id}" readonly>
+					</div>
+					<div class="layui-form-mid layui-word-aux">系统自动生成，不允许修改</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">AppSecret</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input w300" value="{$app_secret}" readonly>
+					</div>
+					<div class="layui-form-mid layui-word-aux">系统自动生成，不允许修改</div>
+				</div>
+
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<input type="hidden"  name="app_id" lay-verify="app_id" value="{$app_id}" />
+						<input type="hidden"  name="app_secret" lay-verify="app_secret" value="{$app_secret}" />
+						<button class="layui-btn" lay-submit lay-filter="admin_form">立即提交</button>
+						<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</fieldset>
+</div>
+	<script type="text/javascript" src="__JS__/layui/layui.js"></script>
+<script>
+	
+	
+	layui.use(['form', 'layedit', 'laydate','layer','jquery'], function() {
+		var form = layui.form,
+			layer = layui.layer,
+			$ = layui.$;
+		//渲染表彰
+		form.render();
+	
+		//自定义验证规则
+		form.verify({
+			name: function(value) {
+				if(value.length < 2) {
+					return '应用名称不能最少为2个字符';
+				}
+			},
+			app_id: function(value) {
+				if(value.length < 1) {
+					return 'AppId不能为空';
+				}
+			},
+			app_secret: function(value) {
+				if(value.length < 1) {
+					return 'AppSecret不能为空';
+				}
+			},
+		});
+
+
+		//监听提交
+		form.on('submit(admin_form)', function(res) {			
+			$.ajax({
+			   type: "POST",
+			   url: "{:url('publish')}",
+			   data: res.field,
+			   success: function(msg){		
+			   	 	if( msg.code == 1 ){
+		                parent.location.reload();
+		            }else{
+		                parent.layer.msg(msg.msg);		
+		            }
+			   }
+			});
+			return false;
+		});
+
+	});
+</script>
+
+</body>
+
+</html>

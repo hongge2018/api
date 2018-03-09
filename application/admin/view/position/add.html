@@ -1,0 +1,22 @@
+{include file="common/header" /}
+<form action="" method="post" name="myform" id="myform">
+  <table width="100%" class="table_form contentWrap">
+    <tr>
+      <th>名称：</th>
+      <td><input type="text" name="name" id="name" class="input-text" style="width:500px;" value=""></td>
+    </tr>
+    <tr>
+      <th>说明：</th>
+      <td><input type="text" name="title" id="title" class="input-text" style="width:500px;" value=""></td>
+    </tr>    
+    <tr>
+      <th>缩略图：</th>
+      <td>{:input_thumb()}</td>
+    </tr>
+  </table>
+  <div class="bk15"></div>
+  <div class="btn">
+    <input type="submit" id="dosubmit" class="button" name="dosubmit" value="提交"/>
+  </div>
+</form>
+</body></html>

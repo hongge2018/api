@@ -1,0 +1,60 @@
+{include file="common/header" /}
+	<style type="text/css">
+		.icon_style {
+			font-size: 30px;
+			color: #1E9FFF;
+		}
+	</style>
+		<button class="layui-btn publish" data-url="{:url('publish')}">新增</button>
+		<table class="layui-table" lay-even="">
+			<thead>
+				<tr>
+					<th width="60">排序</th>
+					<th>ID</th>
+					<th>菜单名称</th>
+					<th>菜单URL</th>
+					<th>隐藏</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{$categorys}
+			</tbody>
+		</table>
+		<script>
+			layui.use(['table', 'layer', 'jquery', 'form'], function() {
+				var table = layui.table,
+					layer = layui.layer,
+					form = layui.form,
+					$ = layui.$;
+
+				//新增或者修改
+				$('.publish').click(function() {
+					layer.open({
+						type: 2,
+						title: '菜单配置',
+						shadeClose: true,
+						shade: 0.8,
+						area: ['50%', '500px'],
+						content: $(this).data('url')
+					});
+				})
+				
+				$('.delete').click(function() {
+					var id=$(this).data('id');
+					$.post('{:url('delete')}',{id:id},function(res){
+						if(res.code==1){
+							layer.msg(res.msg);
+							$('#tr'+id).remove();
+						}else{
+							layer.msg(res.msg);
+						}						
+					});
+				})
+
+
+			})
+		</script>
+	</body>
+
+</html>

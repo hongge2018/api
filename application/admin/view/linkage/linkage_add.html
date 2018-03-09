@@ -1,0 +1,29 @@
+<include file="Public/header" />
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> <a href='javascript:;' class="on"><em>添加菜单</em></a> <span> </span><a href='{:U('linkage_lists',array('keyid'=>$keyid))}'><em>联动菜单</em></a></div>
+</div>
+<form name="myform" action="" method="post" id="myform">
+  <table width="100%" class="table_form contentWrap">
+    <tr>
+      <th>上级菜单</th>
+      <td><select name='parentid' id='parentid' >
+          <option value='0'>无（作为一级栏目）</option>
+          {$select_linkages}
+        </select></td>
+    </tr>
+    <tr>
+      <th>菜单名字：</th>
+      <td><input type="text" name="name" id="name" class="input-text" value=""></td>
+    </tr>
+    <tr>
+      <th>菜单描述：</th>
+      <td><textarea name="description" cols="50" rows="5" id="description"></textarea></td>
+    </tr>
+  </table>  
+  <div class="bk15"></div>
+  <div class="btn">
+    <input type="hidden" name="keyid" value="{$keyid}">
+    <input type="submit" id="dosubmit" class="button" name="dosubmit" value="提交"/>
+  </div>
+</form>
+</body></html>

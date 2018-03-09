@@ -1,0 +1,82 @@
+{include file="common/header" /}
+<div class="pad_10">
+  <div class="table-list">
+    <form action="" method="post" name="myform" id="myform">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="10%"><input class="check-all" type="checkbox" value=""></th>
+            <th width="10%" >表名</th>
+            <th width="10%">类型</th>
+            <th width="10%">编码</th>
+            <th width="15%">记录数</th>
+            <th width="15%">使用空间</th>
+            <th width="15%">碎片</th>
+            <th width="15%">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          {volist name="tablelist" id="vo"}
+            <tr>
+              <td  width="5%" align="center"><input type="checkbox" class="ids" name="tables[]" value="{$vo.name}"/></td>
+              <td  width="10%" align="center">{$vo.name}</td>
+              <td  width="10%" align="center">{$vo.engine}</td>
+              <td  width="10%" align="center">{$vo.collation}</td>
+              <td  width="15%" align="center">{$vo.rows}</td>
+              <td  width="15%" align="center">{$vo.data_length}</td>
+              <td  width="15%" align="center">{$vo.data_free}</td>
+              <td  width="15%" align="center"><a href="{:url('Database/optimization',['tables'=>$vo['name']])}">优化</a> | <a href="{:url('Database/repair',['tables'=>$vo['name']])}">修复</a> | <a href="javascript:void(0);" onclick="showcreat('{$vo.name}','default')">结构</a></td>
+            </tr>
+          {/volist}
+        </tbody>
+      </table>
+      <div class="h50"></div>
+      <div class="btn_bottom_fix">
+        <div class="btn_bottom_fix_pd">
+        <input class="check-all" type="checkbox" value="">
+          <input type="submit" class="button" value="立即备份"/>
+          <input type="submit" class="button" name="dosubmit" data-action='{:url('Database/optimization',['tables'=>$vo['name']])}' value="批量优化"/>
+          <input type="submit" class="button" name="dosubmit" data-action='{:url('Database/repair',['tables'=>$vo['name']])}' value="批量修复"/>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+</form>
+</body>
+<script type="text/javascript">
+$(function(){
+	//全选的实现
+	$(".check-all").click(function(){
+		$(".ids").prop("checked", this.checked);
+	});
+	$(".ids").click(function(){
+		var option = $(".ids");
+		option.each(function(i){
+			if(!this.checked){
+				$(".check-all").prop("checked", false);
+				return false;
+			}else{
+				$(".check-all").prop("checked", true);
+			}
+		});
+	});
+
+});
+
+<!--
+function showcreat(tblname) {
+	window.top.art.dialog({title:tblname, id:'show', iframe:'{:url('showcreat')}?tables='+tblname,width:'500px',height:'350px'});
+}
+function reselect() {
+	var chk = $("input[name=tables[]]");
+	var length = chk.length;
+	for(i=0;i < length;i++){
+		if(chk.eq(i).attr("checked")) chk.eq(i).attr("checked",false);
+		else chk.eq(i).attr("checked",true);
+	}
+}
+
+//-->
+</script>
+</html>

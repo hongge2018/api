@@ -1,0 +1,167 @@
+<include file="Public/header" />
+<script src="http://libs.baidu.com/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript">
+jQuery.fn.extend({
+    uploadPreview: function (opts) {
+        var _self = this,
+            _this = $(this);
+        opts = jQuery.extend({
+            Img: "ImgPr",
+            Width: 100,
+            Height: 100,
+            ImgType: ["gif", "jpeg", "jpg", "bmp", "png"],
+            Callback: function () {}
+        }, opts || {});
+        _self.getObjectURL = function (file) {
+            var url = null;
+            if (window.createObjectURL != undefined) {
+                url = window.createObjectURL(file)
+            } else if (window.URL != undefined) {
+                url = window.URL.createObjectURL(file)
+            } else if (window.webkitURL != undefined) {
+                url = window.webkitURL.createObjectURL(file)
+            }
+            return url
+        };
+        _this.change(function () {
+            if (this.value) {
+                if (!RegExp("\.(" + opts.ImgType.join("|") + ")$", "i").test(this.value.toLowerCase())) {
+                    alert("选择文件错误,图片类型必须是" + opts.ImgType.join("，") + "中的一种");
+                    this.value = "";
+                    return false
+                }
+                if ($.browser.msie) {
+                    try {
+                        $("#" + opts.Img).attr('src', _self.getObjectURL(this.files[0]))
+                    } catch (e) {
+                        var src = "";
+                        var obj = $("#" + opts.Img);
+                        var div = obj.parent("div")[0];
+                        _self.select();
+                        if (top != self) {
+                            window.parent.document.body.focus()
+                        } else {
+                            _self.blur()
+                        }
+                        src = document.selection.createRange().text;
+                        document.selection.empty();
+                        obj.hide();
+                        obj.parent("div").css({
+                            'filter': 'progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)',
+                            'width': opts.Width + 'px',
+                            'height': opts.Height + 'px'
+                        });
+                        div.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = src
+                    }
+                } else {
+                    $("#" + opts.Img).attr('src', _self.getObjectURL(this.files[0]))
+                }
+                opts.Callback()
+            }
+        })
+    }
+});
+ 
+$(function () {
+	$("#img1").uploadPreview({ Img: "myimg1", Width: 320, Height: 100 });
+	$("#img2").uploadPreview({ Img: "myimg2", Width: 320, Height: 100 });
+	$("#img3").uploadPreview({ Img: "myimg3", Width: 320, Height: 100 });
+	$("#img4").uploadPreview({ Img: "myimg4", Width: 320, Height: 100 });
+	$("#img5").uploadPreview({ Img: "myimg5", Width: 320, Height: 100 });
+});
+</script>
+<style>
+.M_file {
+	width:320px;
+	height:100px;
+	position:relative;
+	left:0;
+	top:0;
+	overflow:hidden;
+	margin:0px;
+	border:1px solid #ccc;
+	margin-left:6px;
+	padding:4px;
+}
+.M_file input {
+	width:150%;
+	height:150%;/*为保险起见加上宽高设置*/
+	font-size:999px;
+	position:absolute;
+	left:0;
+	top:0;
+	cursor:pointer;
+	opacity:0;
+	filter:alpha(opacity=0);
+	border:0;
+}
+.M_file img {
+	width:320px;
+	height:100px;
+	position:absolute;
+	bottom:4;
+}
+</style>
+<div class="common-form">
+  <form action="" method="post" enctype="multipart/form-data" name="myform" id="myform">
+    <table width="100%" class="table_form contentWrap">
+      <tr>
+        <th width="200">网站名字:</th>
+        <td><input type="text" name="sitename" id="sitename" value="{$sitename}" style="width:450px;"></td>
+      </tr>
+      <tr>
+        <th>图1:</th>
+        <td><div class="M_file">
+            <empty name="img1"><img src="__IMG__/sctp_img.jpg" name="myimg1" id="myimg1" />
+              <else />
+              <img src="__ROOT__/Uploads/{$img1}" name="myimg1" id="myimg1" /></empty>
+            <input name="img1" type="file" id="img1" />
+          </div></td>
+      </tr>
+      <tr>
+        <th>图2:</th>
+        <td><div class="M_file">
+            <empty name="img2"><img src="__IMG__/sctp_img.jpg" name="myimg2" id="myimg2" />
+              <else />
+              <img src="__ROOT__/Uploads/{$img2}" name="myimg2" id="myimg2" /></empty>
+            <input name="img2" type="file" id="img2" />
+          </div></td>
+      </tr>
+      <tr>
+        <th>图3:</th>
+        <td><div class="M_file">
+            <empty name="img3"><img src="__IMG__/sctp_img.jpg" name="myimg3" id="myimg3" />
+              <else />
+              <img src="__ROOT__/Uploads/{$img3}" name="myimg3" id="myimg3" /></empty>
+            <input name="img3" type="file" id="img3" />
+          </div></td>
+      </tr>
+      <tr>
+        <th>图4:</th>
+        <td><div class="M_file">
+            <empty name="img4"><img src="__IMG__/sctp_img.jpg" name="myimg4" id="myimg4" />
+              <else />
+              <img src="__ROOT__/Uploads/{$img4}" name="myimg4" id="myimg4" /></empty>
+            <input name="img4" type="file" id="img4" />
+          </div></td>
+      </tr>
+      <tr>
+        <th>图5:</th>
+        <td><div class="M_file">
+            <empty name="img5"><img src="__IMG__/sctp_img.jpg" name="myimg5" id="myimg5" />
+              <else />
+              <img src="__ROOT__/Uploads/{$img5}" name="myimg5" id="myimg5" /></empty>
+            <input name="img5" type="file" id="img5" />
+          </div></td>
+      </tr>
+    </table>
+    <!--table_form_off-->
+    
+    <div class="bk15"></div>
+    <input name="userid" type="hidden" id="userid" value="{$userid}">
+    <div class="btn">
+      <input type="submit" id="dosubmit" class="button" name="dosubmit" value="提交"/>
+    </div>
+  </form>
+</div>
+</body></html>

@@ -1,0 +1,43 @@
+<include file="Public/header" />
+<div class="subnav">
+    <div class="content-menu ib-a blue line-x">
+    <a href='javascript:;' class="on"><em>图片列表</em></a><span>|</span><a href='{:U('poster_add',array('spaceid'=>$spaceid))}'><em>添加图片</em></a></div>
+</div>
+<form name="myform" action="" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="100">id</th>
+            <th>名字</th>
+            <th>排序</th>
+            <th>链接</th>
+            <th>说明</th>
+            <th width="120">时间</th>
+            <th width="100">管理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="list" id="vo">
+            <tr>
+              <td align='center'>{$vo.id}</td>
+              <td >{$vo.name}</td>
+              <td >{$vo.listorder}</td>
+              <td >{$vo.img_url}</td>
+              <td >{$vo.img_alt}</td>
+              <td >{$vo.inputtime|date="Y-m-d H:i:s",###}</td>
+              <td align='center'><a href="{:U('poster_edit',array('id'=>$vo['id'],'menuid'=>$menuid))}">修改</a> | <a href="{:U('poster_delete',array('id'=>$vo['id'],'menuid'=>$menuid))}">删除</a></td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="排序" />
+      </div>
+      <div id="pages"> {$page} </div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

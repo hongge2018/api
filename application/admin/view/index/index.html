@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>API管理后台</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+
+		<link rel="stylesheet" href="__JS__/layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="__CSS__/global.css" media="all">
+		<style>
+			dl dd{
+				border-bottom-width: 1px;
+				border-bottom-style: solid;
+				border-bottom-color: #F4FAFF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="layui-layout layui-layout-admin">
+			<div class="layui-header">
+				<div class="layui-logo">API管理后台</div>
+				<!-- 头部区域（可配合layui已有的水平导航） -->
+				<ul class="layui-nav layui-layout-left root_menu layui-hide-xs layui-hide-sm" pc>
+					{volist name="root_menu" id="data"}
+					<li class="layui-nav-item {eq name="key" value="1"}layui-this{/eq}" data-menuid={$data.id}>
+						<a>{$data.name}</a>
+					</li>
+					{/volist}
+				</ul>
+				<ul class="layui-nav layui-layout-right">
+					<li class="layui-nav-item">
+						<a href="javascript:;">
+							壮壮
+						</a>
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="">基本资料</a>
+							</dd>
+							<dd>
+								<a href="">安全设置</a>
+							</dd>
+							<dd>
+								<a href="">退出登录</a>
+							</dd>
+						</dl>
+					</li>
+		
+				</ul>
+			</div>
+
+			<div class="layui-side layui-bg-black">
+				<div class="layui-side-scroll">
+					<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+					<ul class="layui-nav layui-nav-tree" id="life_menu" lay-filter="left_menu">
+						{$default_left_menu}
+					</ul>
+				</div>
+			</div>
+
+			<div class="layui-body">
+				<!-- 内容主体区域 -->
+				<iframe name="right" id="rightMain" src="{:url('Index/main')}" frameborder="false" scrolling="auto" style="border:none; margin:5px" width="100%" allowtransparency="true"></iframe>
+			</div>
+
+			<div class="layui-footer">
+				<!-- 底部固定区域 -->
+				© zzcms.com
+			</div>
+		</div>
+		<div class="site-tree-mobile layui-hide">
+		  <i class="layui-icon"></i>
+		</div>
+		<script type="text/javascript" src="__JS__/layui/layui.js"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use(['jquery','element'], function() {
+				var $ = layui.jquery,
+					element = layui.element;
+				
+				//初始化右侧内容区域高度			
+				$('#rightMain').height($('.layui-body').height()-15);
+				
+				//手机设备的简单适配
+				var treeMobile = $('.site-tree-mobile'),
+					shadeMobile = $('.site-mobile-shade');
+
+				treeMobile.on('click', function() {
+					$('body').addClass('site-mobile');
+				});
+
+				shadeMobile.on('click', function() {
+					$('body').removeClass('site-mobile');
+				});
+				//点击值
+				$('.root_menu li').click(function(){
+					var menuid=$(this).data('menuid');
+					$.post('{:url('menuLeft')}',{menuid:menuid}, function (data) {
+						$('.layui-nav-tree').html(data.msg);     
+						element.init();
+					})					
+				})
+				//监听菜单点击
+				element.on('nav(left_menu)', function(elem){
+					var url=$(this).find('a').attr("data-url");
+					//console.log(url);
+					$("#rightMain").attr('src', url);		
+				});
+			});
+			
+			
+		
+		</script>
+
+	</body>
+
+</html>

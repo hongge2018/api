@@ -1,0 +1,46 @@
+{include file="common/header" /}
+<div class="pad_10">
+  <div class="table-list">
+    <form method="post" id="myform" name="myform" >
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="10%"  align="left"><input type="checkbox" value="" id="check_box" onclick="selectall('filenames[]');"></th>
+            <th width="15%">文件名称</th>
+            <th width="15%">文件大小</th>
+            <th width="15%">备份时间</th>
+            <th width="15%">卷号</th>
+            <th width="15%">操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        {volist name="list" id="vo"}
+        <tr>
+          <td width="10%"><input type="checkbox" name="filenames[]" value="{$vo.name}" id="sql_phpcms" boxid="sql_phpcms"></td>
+          <td  width="15%" align="center">{$vo.name}</td>
+          <td width="15%" align="center">{$vo.size}</td>
+          <td width="15%" align="center">{$vo.time|date="Y-m-d H:i:s",###}</td>
+          <td width="15%" align="center">{$vo.part}</td>
+          <td width="15%" align="center"><a href="{:url('import',array('per'=>$vo['per']))}">数据恢复</a></td>
+        </tr>
+        {/volist}
+          </tbody>
+        
+      </table>
+      <div class="btn">
+        <label for="check_box">全选/取消</label>
+        <input type="submit" class="button" name="dosubmit" value="删除备份文件" onclick="document.myform.action='{:url('delete_file')}';return confirm('您要删除备份文件吗？')"/>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+<!--
+function show_tbl(obj) {
+	var pdoname = $(obj).val();
+	location.href='';
+}
+//-->
+</script>
+</body></html>

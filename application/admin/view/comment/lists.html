@@ -1,0 +1,55 @@
+{include file="common/header" /}
+<div id="searchid">
+  <form name="searchform" action="" method="post" >
+    <table width="100%" cellspacing="0" class="search-form">
+      <tbody>
+        <tr>
+          <td><div class="explain-col"> 时间：{:input_date('start_time',['type'=>'s'])}- &nbsp;{:input_date('end_time',['is_load'=>0,'type'=>'s'])}
+              <select name="searchtype">
+                <option value='title' selected>标题</option>
+                <option value='content'>内容</option>
+              </select>
+              <input name="keyword" type="text" value="" class="input-text" />
+              <input type="submit" name="search" class="button" value="搜索" />
+            </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+<form name="myform" action="" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      {volist name="list" id="vo"}
+        <table width="100%" border="1" cellspacing="0" class="tables">
+          <tbody>
+            <tr>
+              <td width="60">Id：{$vo.commentid}</td>
+              <td><img src="__IMG__/star/{$vo.star}.jpg" /> &nbsp;&nbsp;【{$modulelist[$vo['module']]}】 {$vo.title}</td>
+              <td width="130">{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+              <td width="80"><a href="{:url('set_status',array('id'=>$vo['commentid'],'status'=>$vo['status'],'menuid'=>$menuid))}">{eq name="vo['status']" value="0"}显示{else/}不显示{/eq}</a> | <a href="{:url('delete',array('id'=>$vo['commentid'],'menuid'=>$menuid))}">删除</a></td>
+            </tr>
+            <tr>
+              <td>评论内容：</td>
+              <td colspan="3">{$vo.content|htmlspecialchars_decode}</td>
+    
+            </tr>
+          </tbody>
+        </table>
+      {/volist}
+      <div class="btn">
+        <input type="button" class="button" value="排序" onclick="myform.action='{:url('listorder')}';myform.submit();"/>
+      </div>
+      <div id="pages"> {$list->render()} </div>
+    </div>
+  </div>
+  </div>
+</form>
+<style type="text/css">
+.tables {
+	line-height: 30px;
+	margin-bottom: 30px;
+	border: 1px solid #CCC;
+}
+</style>
+</body></html>

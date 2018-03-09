@@ -1,0 +1,37 @@
+{include file="common/header" /}
+<div class="pad_10">
+  <div class="table-list">
+    <form name="myform" action="" method="post">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>用户名</th>
+            <th>角色组</th>
+            <th>E-mail</th>
+            <th>真实姓名</th>
+            <th>最后登录IP</th>
+            <th>最后登录时间</th>
+            <th width="100" >管理操作</th>
+          </tr>
+        </thead>
+        <tbody>
+        {volist name="adminlist" id="vo"}
+          <tr>
+            <td>{$vo.userid}</td>
+            <td>{$vo.username}</td>
+            <td>{$vo.rulename}</td>
+            <td>{$vo.email}</td>
+            <td align="center">{$vo.realname}</td>
+            <td>{$vo.lastloginip}</td>
+            <td>{$vo.lastlogintime|date="Y-m-d H:i:s",###}</td>
+            <td align="center"><a href="{:url('admin_edit',array('id'=>$vo['userid']))}">修改</a></td>
+          </tr>
+          {/volist}
+        </tbody>
+      </table>
+      <div id="pages"> </div>
+    </form>
+  </div>
+</div>
+</body></html>

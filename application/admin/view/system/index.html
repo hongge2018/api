@@ -1,0 +1,80 @@
+{include file="common/header" /}
+<form action="" method="post" id="myform">
+  <div class="pad-10">
+    <div class="col-tab">
+      <ul class="tabBut cu-li">
+        <li id="tab_setting_1" class="on" onclick="SwapTab('setting','on','',2,1);">基本配置</li>
+        <li id="tab_setting_2" onclick="SwapTab('setting','on','',2,2);">其他配置</li>
+      </ul>
+      <div id="div_setting_1" class="contentList pad-10">
+            <table width="100%" class="table_form contentWrap">
+        <tr>
+          <th width="120">网站名字</th>
+          <td><input type="text" name="site_name" id="site_name" class="input-text" size="30" value="{$site_name}">
+            </input>
+            </td>
+        </tr>
+        <tr>
+          <th width="120">网站标题</th>
+          <td><input type="text" name="site_title" id="site_title" class="input-text" size="60" value="{$site_title}">
+            </input></td>
+        </tr>
+        <tr>
+        <tr>
+          <th width="120">关键字</th>
+          <td><input type="text" name="site_keywords" id="site_keywords" class="input-text" size="60" value="{$site_keywords}">
+            </input></td>
+        </tr>
+        <tr>
+          <th width="120">描述</th>
+          <td><textarea name="site_description" cols="60" rows="5">{$site_description}</textarea></td>
+        </tr>
+        <tr>
+          <th width="120">客服电话</th>
+          <td><input type="text" name="site_phone" id="site_phone" class="input-text" size="30" value="{$site_phone}">
+            </input></td>
+        </tr>
+        <tr>
+          <th width="120">客服QQ</th>
+          <td><input type="text" name="site_qq" id="site_qq" class="input-text" size="30" value="{$site_qq}">
+            </input></td>
+        </tr>
+        <tr>
+          <th width="120">客服微信</th>
+          <td><input type="text" name="site_weixin" id="site_weixin" class="input-text" size="30" value="{$site_weixin}">
+            </input></td>
+        </tr>
+        <tr>
+          <th width="120">意见建议</th>
+          <td><input type="text" name="site_forever" id="site_forever" class="input-text" size="30" value="{$site_forever}">
+            </input></td>
+        </tr>
+        <tr>
+          <th width="120">公司地址</th>
+          <td><input type="text" name="site_address" id="site_address" class="input-text" size="30" value="{$site_address}">
+            </input></td>
+        </tr>
+        <tr>
+          <th width="120">ICP</th>
+          <td><input type="text" name="site_icp" id="site_icp" class="input-text" size="30" value="{$site_icp}">
+            </input></td>
+        </tr>
+      </table>
+      </div>
+      <div id="div_setting_2" class="contentList pad-10 hidden">
+        <table width="100%"  class="table_form">
+          <tr>
+            <th width="120">预订须知</th>
+            <td class="y-bg">
+        <textarea name="site_order_notice" cols="100" rows="8" id="site_order_notice">{$site_order_notice}</textarea></td>
+          </tr>
+        </table>
+      </div>    
+      <div class="bk15"></div>
+      <input name="id" type="hidden" value="{$id}" />
+      <input name="dosubmit" type="submit" value="提交" class="button" id="dosubmit">
+    </div>
+  </div>
+</form>
+
+</body></html>

@@ -1,0 +1,33 @@
+{include file="common/header" /}
+<form name="myform" action="" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="100">id</th>
+            <th>名称</th>
+            <th>模块</th>
+            <th width="50">管理</th>
+          </tr>
+        </thead>
+        <tbody>
+          {volist name="list" id="vo"}
+            <tr>
+              <td>{$vo.id}</td>
+              <td >{$vo.title}</td>
+              <td >{:get_module_name($vo['module'])}</td>
+              <td align='center'> <a href="{:url('info_delete',array('id'=>$vo['id'],'posid'=>$vo['posid']))}">删除</a></td>
+            </tr>
+          {/volist}
+        </tbody>
+      </table>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="排序" />
+      </div>
+      <div id="pages"> {$list->render()} </div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

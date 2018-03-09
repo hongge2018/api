@@ -1,0 +1,1762 @@
+{include file="common/header" /}
+<script type="text/javascript">
+	window.focus();
+	var pc_hash = 'vGYI0Q';
+			window.onload = function(){
+		var html_a = document.getElementsByTagName('a');
+		var num = html_a.length;
+		for(var i=0;i<num;i++) {
+			var href = html_a[i].href;
+			if(href && href.indexOf('javascript:') == -1) {
+				if(href.indexOf('?') != -1) {
+					html_a[i].href = href+'&pc_hash='+pc_hash;
+				} else {
+					html_a[i].href = href+'?pc_hash='+pc_hash;
+				}
+			}
+		}
+
+		var html_form = document.forms;
+		var num = html_form.length;
+		for(var i=0;i<num;i++) {
+			var newNode = document.createElement("input");
+			newNode.name = 'pc_hash';
+			newNode.type = 'hidden';
+			newNode.value = pc_hash;
+			html_form[i].appendChild(newNode);
+		}
+	}
+</script>
+</head>
+<body>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+<link href="http://www.phpcms.com/statics/css/jquery.treeTable.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://www.phpcms.com/statics/js/jquery.treetable.js"></script> 
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#dnd-example").treeTable({
+    	indent: 20
+    	});
+  });
+  function checknode(obj)
+  {
+      var chk = $("input[type='checkbox']");
+      var count = chk.length;
+      var num = chk.index(obj);
+      var level_top = level_bottom =  chk.eq(num).attr('level')
+      for (var i=num; i>=0; i--)
+      {
+              var le = chk.eq(i).attr('level');
+              if(eval(le) < eval(level_top)) 
+              {
+                  chk.eq(i).attr("checked",'checked');
+                  var level_top = level_top-1;
+              }
+      }
+      for (var j=num+1; j<count; j++)
+      {
+              var le = chk.eq(j).attr('level');
+              if(chk.eq(num).attr("checked")=='checked') {
+                  if(eval(le) > eval(level_bottom)) chk.eq(j).attr("checked",'checked');
+                  else if(eval(le) == eval(level_bottom)) break;
+              }
+              else {
+                  if(eval(le) > eval(level_bottom)) chk.eq(j).attr("checked",false);
+                  else if(eval(le) == eval(level_bottom)) break;
+              }
+      }
+  }
+</script>
+<div class="table-list" id="load_priv">
+  <table width="100%" cellspacing="0">
+    <thead>
+      <tr>
+        <th class="text-l cu-span" style='padding-left:30px;'><span onClick="javascript:$('input[name=menuid[]]').attr('checked', true)">全选</span>/<span onClick="javascript:$('input[name=menuid[]]').attr('checked', false)">取消</span></th>
+      </tr>
+    </thead>
+  </table>
+  <form name="myform" action="?m=admin&c=role&a=role_priv" method="post">
+    <input type="hidden" name="roleid" value="5">
+    </input>
+    <input type="hidden" name="siteid" value="1">
+    </input>
+    <table width="100%" cellspacing="0" id="dnd-example">
+      <tbody>
+        <tr id='node-1' >
+          <td style='padding-left:30px;'><input type='checkbox' name='menuid[]' value='1' level='0'  onclick='javascript:checknode(this);'>
+            设置</td>
+        </tr>
+        <tr id='node-30'  class="child-of-node-1">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='30' level='1'  onclick='javascript:checknode(this);'>
+            相关设置</td>
+        </tr>
+        <tr id='node-64'  class="child-of-node-30">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='64' level='2'  onclick='javascript:checknode(this);'>
+            站点管理</td>
+        </tr>
+        <tr id='node-67'  class="child-of-node-64">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='67' level='3'  onclick='javascript:checknode(this);'>
+            添加站点</td>
+        </tr>
+        <tr id='node-814'  class="child-of-node-64">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='814' level='3'  onclick='javascript:checknode(this);'>
+            编辑站点</td>
+        </tr>
+        <tr id='node-815'  class="child-of-node-64">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='815' level='3'  onclick='javascript:checknode(this);'>
+            删除站点</td>
+        </tr>
+        <tr id='node-65'  class="child-of-node-30">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='65' level='2'  onclick='javascript:checknode(this);'>
+            发布点管理</td>
+        </tr>
+        <tr id='node-816'  class="child-of-node-65">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='816' level='3'  onclick='javascript:checknode(this);'>
+            添加发布点</td>
+        </tr>
+        <tr id='node-817'  class="child-of-node-65">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='817' level='3'  onclick='javascript:checknode(this);'>
+            删除发布点</td>
+        </tr>
+        <tr id='node-818'  class="child-of-node-65">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='818' level='3'  onclick='javascript:checknode(this);'>
+            编辑发布点</td>
+        </tr>
+        <tr id='node-979'  class="child-of-node-30">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='979' level='2'  onclick='javascript:checknode(this);'>
+            安全配置</td>
+        </tr>
+        <tr id='node-959'  class="child-of-node-30">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='959' level='2'  onclick='javascript:checknode(this);'>
+            基本设置</td>
+        </tr>
+        <tr id='node-980'  class="child-of-node-30">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='980' level='2'  onclick='javascript:checknode(this);'>
+            PHPSSO配置</td>
+        </tr>
+        <tr id='node-981'  class="child-of-node-30">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='981' level='2'  onclick='javascript:checknode(this);'>
+            邮箱配置</td>
+        </tr>
+        <tr id='node-1038'  class="child-of-node-30">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1038' level='2'  onclick='javascript:checknode(this);'>
+            配置保存</td>
+        </tr>
+        <tr id='node-1093'  class="child-of-node-30">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1093' level='2'  onclick='javascript:checknode(this);'>
+            connect</td>
+        </tr>
+        <tr id='node-49'  class="child-of-node-1">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='49' level='1'  onclick='javascript:checknode(this);'>
+            管理员设置</td>
+        </tr>
+        <tr id='node-54'  class="child-of-node-49">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='54' level='2'  onclick='javascript:checknode(this);'>
+            管理员管理</td>
+        </tr>
+        <tr id='node-58'  class="child-of-node-54">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='58' level='3'  onclick='javascript:checknode(this);'>
+            添加管理员</td>
+        </tr>
+        <tr id='node-1040'  class="child-of-node-54">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1040' level='3'  onclick='javascript:checknode(this);'>
+            编辑管理员</td>
+        </tr>
+        <tr id='node-1042'  class="child-of-node-54">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1042' level='3'  onclick='javascript:checknode(this);'>
+            删除管理员</td>
+        </tr>
+        <tr id='node-1043'  class="child-of-node-54">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1043' level='3'  onclick='javascript:checknode(this);'>
+            电子口令卡</td>
+        </tr>
+        <tr id='node-1044'  class="child-of-node-54">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1044' level='3'  onclick='javascript:checknode(this);'>
+            绑定口令卡</td>
+        </tr>
+        <tr id='node-1045'  class="child-of-node-54">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1045' level='3'  onclick='javascript:checknode(this);'>
+            解除口令卡</td>
+        </tr>
+        <tr id='node-50'  class="child-of-node-49">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='50' level='2'  onclick='javascript:checknode(this);'>
+            角色管理</td>
+        </tr>
+        <tr id='node-51'  class="child-of-node-50">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='51' level='3'  onclick='javascript:checknode(this);'>
+            添加角色</td>
+        </tr>
+        <tr id='node-852'  class="child-of-node-50">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='852' level='3'  onclick='javascript:checknode(this);'>
+            权限设置</td>
+        </tr>
+        <tr id='node-853'  class="child-of-node-50">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='853' level='3'  onclick='javascript:checknode(this);'>
+            权限分配</td>
+        </tr>
+        <tr id='node-1050'  class="child-of-node-50">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1050' level='3'  onclick='javascript:checknode(this);'>
+            修改角色</td>
+        </tr>
+        <tr id='node-1052'  class="child-of-node-50">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1052' level='3'  onclick='javascript:checknode(this);'>
+            会员管理</td>
+        </tr>
+        <tr id='node-1053'  class="child-of-node-50">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1053' level='3'  onclick='javascript:checknode(this);'>
+            删除角色</td>
+        </tr>
+        <tr id='node-2' >
+          <td style='padding-left:30px;'><input type='checkbox' name='menuid[]' value='2' level='0'  onclick='javascript:checknode(this);'>
+            模块</td>
+        </tr>
+        <tr id='node-29'  class="child-of-node-2">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='29' level='1'  onclick='javascript:checknode(this);'>
+            模块列表</td>
+        </tr>
+        <tr id='node-896'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='896' level='2'  onclick='javascript:checknode(this);'>
+            在线充值</td>
+        </tr>
+        <tr id='node-897'  class="child-of-node-896">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='897' level='3'  onclick='javascript:checknode(this);'>
+            支付模块</td>
+        </tr>
+        <tr id='node-1057'  class="child-of-node-897">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1057' level='4'  onclick='javascript:checknode(this);'>
+            支付模块添加</td>
+        </tr>
+        <tr id='node-1058'  class="child-of-node-897">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1058' level='4'  onclick='javascript:checknode(this);'>
+            支付模块卸载</td>
+        </tr>
+        <tr id='node-1059'  class="child-of-node-897">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1059' level='4'  onclick='javascript:checknode(this);'>
+            支付模块编辑</td>
+        </tr>
+        <tr id='node-898'  class="child-of-node-896">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='898' level='3'  onclick='javascript:checknode(this);'>
+            充值记录</td>
+        </tr>
+        <tr id='node-1354'  class="child-of-node-898">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1354' level='4'  onclick='javascript:checknode(this);'>
+            删除支付记录</td>
+        </tr>
+        <tr id='node-1355'  class="child-of-node-898">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1355' level='4'  onclick='javascript:checknode(this);'>
+            取消充值</td>
+        </tr>
+        <tr id='node-1356'  class="child-of-node-898">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1356' level='4'  onclick='javascript:checknode(this);'>
+            充值改价</td>
+        </tr>
+        <tr id='node-900'  class="child-of-node-896">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='900' level='3'  onclick='javascript:checknode(this);'>
+            充值入帐</td>
+        </tr>
+        <tr id='node-1060'  class="child-of-node-896">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1060' level='3'  onclick='javascript:checknode(this);'>
+            消费记录</td>
+        </tr>
+        <tr id='node-1061'  class="child-of-node-896">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1061' level='3'  onclick='javascript:checknode(this);'>
+            在线充值统计</td>
+        </tr>
+        <tr id='node-902'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='902' level='2'  onclick='javascript:checknode(this);'>
+            数据源</td>
+        </tr>
+        <tr id='node-904'  class="child-of-node-902">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='904' level='3'  onclick='javascript:checknode(this);'>
+            外部数据源</td>
+        </tr>
+        <tr id='node-917'  class="child-of-node-902">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='917' level='3'  onclick='javascript:checknode(this);'>
+            添加外部数据源</td>
+        </tr>
+        <tr id='node-918'  class="child-of-node-902">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='918' level='3'  onclick='javascript:checknode(this);'>
+            编辑外部数据源</td>
+        </tr>
+        <tr id='node-919'  class="child-of-node-902">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='919' level='3'  onclick='javascript:checknode(this);'>
+            删除外部数据源</td>
+        </tr>
+        <tr id='node-920'  class="child-of-node-902">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='920' level='3'  onclick='javascript:checknode(this);'>
+            添加数据源调用</td>
+        </tr>
+        <tr id='node-921'  class="child-of-node-902">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='921' level='3'  onclick='javascript:checknode(this);'>
+            编辑数据源调用</td>
+        </tr>
+        <tr id='node-922'  class="child-of-node-902">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='922' level='3'  onclick='javascript:checknode(this);'>
+            删除数据源调用</td>
+        </tr>
+        <tr id='node-909'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='909' level='2'  onclick='javascript:checknode(this);'>
+            全站搜索</td>
+        </tr>
+        <tr id='node-910'  class="child-of-node-909">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='910' level='3'  onclick='javascript:checknode(this);'>
+            管理分类</td>
+        </tr>
+        <tr id='node-911'  class="child-of-node-909">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='911' level='3'  onclick='javascript:checknode(this);'>
+            全站搜索配置</td>
+        </tr>
+        <tr id='node-912'  class="child-of-node-909">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='912' level='3'  onclick='javascript:checknode(this);'>
+            重建索引</td>
+        </tr>
+        <tr id='node-913'  class="child-of-node-909">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='913' level='3'  onclick='javascript:checknode(this);'>
+            添加搜索分类</td>
+        </tr>
+        <tr id='node-1502'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1502' level='2'  onclick='javascript:checknode(this);'>
+            公告</td>
+        </tr>
+        <tr id='node-1503'  class="child-of-node-1502">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1503' level='3'  onclick='javascript:checknode(this);'>
+            添加公告</td>
+        </tr>
+        <tr id='node-1504'  class="child-of-node-1502">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1504' level='3'  onclick='javascript:checknode(this);'>
+            编辑公告</td>
+        </tr>
+        <tr id='node-1505'  class="child-of-node-1502">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1505' level='3'  onclick='javascript:checknode(this);'>
+            审核公告</td>
+        </tr>
+        <tr id='node-1506'  class="child-of-node-1502">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1506' level='3'  onclick='javascript:checknode(this);'>
+            问答公告</td>
+        </tr>
+        <tr id='node-1507'  class="child-of-node-1502">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1507' level='3'  onclick='javascript:checknode(this);'>
+            删除公告</td>
+        </tr>
+        <tr id='node-1508'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1508' level='2'  onclick='javascript:checknode(this);'>
+            评论</td>
+        </tr>
+        <tr id='node-1511'  class="child-of-node-1508">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1511' level='3'  onclick='javascript:checknode(this);'>
+            评论列表</td>
+        </tr>
+        <tr id='node-1512'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1512' level='2'  onclick='javascript:checknode(this);'>
+            友情链接</td>
+        </tr>
+        <tr id='node-1513'  class="child-of-node-1512">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1513' level='3'  onclick='javascript:checknode(this);'>
+            添加友情链接</td>
+        </tr>
+        <tr id='node-1514'  class="child-of-node-1512">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1514' level='3'  onclick='javascript:checknode(this);'>
+            编辑友情链接</td>
+        </tr>
+        <tr id='node-1515'  class="child-of-node-1512">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1515' level='3'  onclick='javascript:checknode(this);'>
+            删除友情链接</td>
+        </tr>
+        <tr id='node-1516'  class="child-of-node-1512">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1516' level='3'  onclick='javascript:checknode(this);'>
+            模块配置</td>
+        </tr>
+        <tr id='node-1517'  class="child-of-node-1512">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1517' level='3'  onclick='javascript:checknode(this);'>
+            添加类别</td>
+        </tr>
+        <tr id='node-1518'  class="child-of-node-1512">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1518' level='3'  onclick='javascript:checknode(this);'>
+            分类管理</td>
+        </tr>
+        <tr id='node-1519'  class="child-of-node-1512">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1519' level='3'  onclick='javascript:checknode(this);'>
+            审核申请</td>
+        </tr>
+        <tr id='node-1520'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1520' level='2'  onclick='javascript:checknode(this);'>
+            投票</td>
+        </tr>
+        <tr id='node-1521'  class="child-of-node-1520">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1521' level='3'  onclick='javascript:checknode(this);'>
+            添加投票</td>
+        </tr>
+        <tr id='node-1522'  class="child-of-node-1520">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1522' level='3'  onclick='javascript:checknode(this);'>
+            编辑投票</td>
+        </tr>
+        <tr id='node-1523'  class="child-of-node-1520">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1523' level='3'  onclick='javascript:checknode(this);'>
+            删除投票</td>
+        </tr>
+        <tr id='node-1524'  class="child-of-node-1520">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1524' level='3'  onclick='javascript:checknode(this);'>
+            投票配置</td>
+        </tr>
+        <tr id='node-1525'  class="child-of-node-1520">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1525' level='3'  onclick='javascript:checknode(this);'>
+            查看统计</td>
+        </tr>
+        <tr id='node-1526'  class="child-of-node-1520">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1526' level='3'  onclick='javascript:checknode(this);'>
+            会员统计</td>
+        </tr>
+        <tr id='node-1527'  class="child-of-node-1520">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1527' level='3'  onclick='javascript:checknode(this);'>
+            更新JS</td>
+        </tr>
+        <tr id='node-1528'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1528' level='2'  onclick='javascript:checknode(this);'>
+            短消息</td>
+        </tr>
+        <tr id='node-1529'  class="child-of-node-1528">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1529' level='3'  onclick='javascript:checknode(this);'>
+            发送消息</td>
+        </tr>
+        <tr id='node-1530'  class="child-of-node-1528">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1530' level='3'  onclick='javascript:checknode(this);'>
+            删除短消息</td>
+        </tr>
+        <tr id='node-1531'  class="child-of-node-1528">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1531' level='3'  onclick='javascript:checknode(this);'>
+            群发短消息</td>
+        </tr>
+        <tr id='node-1532'  class="child-of-node-1528">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1532' level='3'  onclick='javascript:checknode(this);'>
+            群发短消息管理</td>
+        </tr>
+        <tr id='node-1533'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1533' level='2'  onclick='javascript:checknode(this);'>
+            新闻心情</td>
+        </tr>
+        <tr id='node-1534'  class="child-of-node-1533">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1534' level='3'  onclick='javascript:checknode(this);'>
+            心情配置</td>
+        </tr>
+        <tr id='node-1535'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1535' level='2'  onclick='javascript:checknode(this);'>
+            广告</td>
+        </tr>
+        <tr id='node-1536'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1536' level='3'  onclick='javascript:checknode(this);'>
+            添加版位</td>
+        </tr>
+        <tr id='node-1537'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1537' level='3'  onclick='javascript:checknode(this);'>
+            编辑版位</td>
+        </tr>
+        <tr id='node-1538'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1538' level='3'  onclick='javascript:checknode(this);'>
+            删除版位</td>
+        </tr>
+        <tr id='node-1539'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1539' level='3'  onclick='javascript:checknode(this);'>
+            广告列表</td>
+        </tr>
+        <tr id='node-1540'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1540' level='3'  onclick='javascript:checknode(this);'>
+            添加广告</td>
+        </tr>
+        <tr id='node-1541'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1541' level='3'  onclick='javascript:checknode(this);'>
+            编辑广告</td>
+        </tr>
+        <tr id='node-1542'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1542' level='3'  onclick='javascript:checknode(this);'>
+            删除广告</td>
+        </tr>
+        <tr id='node-1543'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1543' level='3'  onclick='javascript:checknode(this);'>
+            广告统计</td>
+        </tr>
+        <tr id='node-1544'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1544' level='3'  onclick='javascript:checknode(this);'>
+            模块配置</td>
+        </tr>
+        <tr id='node-1545'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1545' level='3'  onclick='javascript:checknode(this);'>
+            重新生成js</td>
+        </tr>
+        <tr id='node-1546'  class="child-of-node-1535">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1546' level='3'  onclick='javascript:checknode(this);'>
+            广告模板设置</td>
+        </tr>
+        <tr id='node-1547'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1547' level='2'  onclick='javascript:checknode(this);'>
+            表单向导</td>
+        </tr>
+        <tr id='node-1548'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1548' level='3'  onclick='javascript:checknode(this);'>
+            添加表单向导</td>
+        </tr>
+        <tr id='node-1549'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1549' level='3'  onclick='javascript:checknode(this);'>
+            修改表单向导</td>
+        </tr>
+        <tr id='node-1550'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1550' level='3'  onclick='javascript:checknode(this);'>
+            信息列表</td>
+        </tr>
+        <tr id='node-1551'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1551' level='3'  onclick='javascript:checknode(this);'>
+            禁用表单</td>
+        </tr>
+        <tr id='node-1552'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1552' level='3'  onclick='javascript:checknode(this);'>
+            删除表单</td>
+        </tr>
+        <tr id='node-1553'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1553' level='3'  onclick='javascript:checknode(this);'>
+            表单统计</td>
+        </tr>
+        <tr id='node-1554'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1554' level='3'  onclick='javascript:checknode(this);'>
+            添加公共字段</td>
+        </tr>
+        <tr id='node-1555'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1555' level='3'  onclick='javascript:checknode(this);'>
+            管理公共字段</td>
+        </tr>
+        <tr id='node-1556'  class="child-of-node-1547">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1556' level='3'  onclick='javascript:checknode(this);'>
+            模块配置</td>
+        </tr>
+        <tr id='node-1557'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1557' level='2'  onclick='javascript:checknode(this);'>
+            手机门户</td>
+        </tr>
+        <tr id='node-1558'  class="child-of-node-1557">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1558' level='3'  onclick='javascript:checknode(this);'>
+            添加站点</td>
+        </tr>
+        <tr id='node-1559'  class="child-of-node-1557">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1559' level='3'  onclick='javascript:checknode(this);'>
+            修改</td>
+        </tr>
+        <tr id='node-1560'  class="child-of-node-1557">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1560' level='3'  onclick='javascript:checknode(this);'>
+            删除</td>
+        </tr>
+        <tr id='node-1561'  class="child-of-node-1557">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1561' level='3'  onclick='javascript:checknode(this);'>
+            分类管理</td>
+        </tr>
+        <tr id='node-1562'  class="child-of-node-1557">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1562' level='3'  onclick='javascript:checknode(this);'>
+            分类编辑</td>
+        </tr>
+        <tr id='node-1563'  class="child-of-node-1557">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1563' level='3'  onclick='javascript:checknode(this);'>
+            分类删除</td>
+        </tr>
+        <tr id='node-1571'  class="child-of-node-29">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1571' level='2'  onclick='javascript:checknode(this);'>
+            短信平台</td>
+        </tr>
+        <tr id='node-1572'  class="child-of-node-1571">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1572' level='3'  onclick='javascript:checknode(this);'>
+            平台设置</td>
+        </tr>
+        <tr id='node-1573'  class="child-of-node-1571">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1573' level='3'  onclick='javascript:checknode(this);'>
+            消费记录</td>
+        </tr>
+        <tr id='node-1574'  class="child-of-node-1571">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1574' level='3'  onclick='javascript:checknode(this);'>
+            充值记录</td>
+        </tr>
+        <tr id='node-1575'  class="child-of-node-1571">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1575' level='3'  onclick='javascript:checknode(this);'>
+            短信API</td>
+        </tr>
+        <tr id='node-1576'  class="child-of-node-1571">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1576' level='3'  onclick='javascript:checknode(this);'>
+            短信群发</td>
+        </tr>
+        <tr id='node-82'  class="child-of-node-2">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='82' level='1'  onclick='javascript:checknode(this);'>
+            模块管理</td>
+        </tr>
+        <tr id='node-982'  class="child-of-node-82">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='982' level='2'  onclick='javascript:checknode(this);'>
+            模块管理</td>
+        </tr>
+        <tr id='node-4' >
+          <td style='padding-left:30px;'><input type='checkbox' name='menuid[]' value='4' level='0'  onclick='javascript:checknode(this);'>
+            内容</td>
+        </tr>
+        <tr id='node-821'  class="child-of-node-4">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='821' level='1'  onclick='javascript:checknode(this);'>
+            内容发布管理</td>
+        </tr>
+        <tr id='node-822'  class="child-of-node-821">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='822' level='2'  onclick='javascript:checknode(this);'>
+            管理内容</td>
+        </tr>
+        <tr id='node-899'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='899' level='3'  onclick='javascript:checknode(this);'>
+            添加内容</td>
+        </tr>
+        <tr id='node-901'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='901' level='3'  onclick='javascript:checknode(this);'>
+            审核内容</td>
+        </tr>
+        <tr id='node-1011'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1011' level='3'  onclick='javascript:checknode(this);'>
+            修改内容</td>
+        </tr>
+        <tr id='node-1012'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1012' level='3'  onclick='javascript:checknode(this);'>
+            推送</td>
+        </tr>
+        <tr id='node-1241'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1241' level='3'  onclick='javascript:checknode(this);'>
+            移动内容</td>
+        </tr>
+        <tr id='node-1244'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1244' level='3'  onclick='javascript:checknode(this);'>
+            同时发布到其他栏目</td>
+        </tr>
+        <tr id='node-1348'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1348' level='3'  onclick='javascript:checknode(this);'>
+            删除内容</td>
+        </tr>
+        <tr id='node-1353'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1353' level='3'  onclick='javascript:checknode(this);'>
+            批量生成HTML</td>
+        </tr>
+        <tr id='node-1500'  class="child-of-node-822">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1500' level='3'  onclick='javascript:checknode(this);'>
+            排序</td>
+        </tr>
+        <tr id='node-857'  class="child-of-node-821">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='857' level='2'  onclick='javascript:checknode(this);'>
+            附件管理</td>
+        </tr>
+        <tr id='node-1295'  class="child-of-node-857">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1295' level='3'  onclick='javascript:checknode(this);'>
+            目录模式</td>
+        </tr>
+        <tr id='node-1296'  class="child-of-node-857">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1296' level='3'  onclick='javascript:checknode(this);'>
+            数据库模式</td>
+        </tr>
+        <tr id='node-1346'  class="child-of-node-857">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1346' level='3'  onclick='javascript:checknode(this);'>
+            附件地址替换</td>
+        </tr>
+        <tr id='node-1347'  class="child-of-node-857">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1347' level='3'  onclick='javascript:checknode(this);'>
+            批量更新地址处理程序</td>
+        </tr>
+        <tr id='node-868'  class="child-of-node-821">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='868' level='2'  onclick='javascript:checknode(this);'>
+            专题</td>
+        </tr>
+        <tr id='node-926'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='926' level='3'  onclick='javascript:checknode(this);'>
+            添加专题</td>
+        </tr>
+        <tr id='node-927'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='927' level='3'  onclick='javascript:checknode(this);'>
+            修改专题</td>
+        </tr>
+        <tr id='node-928'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='928' level='3'  onclick='javascript:checknode(this);'>
+            专题列表</td>
+        </tr>
+        <tr id='node-929'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='929' level='3'  onclick='javascript:checknode(this);'>
+            推荐专题</td>
+        </tr>
+        <tr id='node-930'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='930' level='3'  onclick='javascript:checknode(this);'>
+            删除专题</td>
+        </tr>
+        <tr id='node-934'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='934' level='3'  onclick='javascript:checknode(this);'>
+            专题排序</td>
+        </tr>
+        <tr id='node-935'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='935' level='3'  onclick='javascript:checknode(this);'>
+            信息列表</td>
+        </tr>
+        <tr id='node-936'  class="child-of-node-935">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='936' level='4'  onclick='javascript:checknode(this);'>
+            信息添加</td>
+        </tr>
+        <tr id='node-937'  class="child-of-node-935">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='937' level='4'  onclick='javascript:checknode(this);'>
+            信息列表</td>
+        </tr>
+        <tr id='node-938'  class="child-of-node-935">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='938' level='4'  onclick='javascript:checknode(this);'>
+            信息修改</td>
+        </tr>
+        <tr id='node-939'  class="child-of-node-935">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='939' level='4'  onclick='javascript:checknode(this);'>
+            信息删除</td>
+        </tr>
+        <tr id='node-940'  class="child-of-node-935">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='940' level='4'  onclick='javascript:checknode(this);'>
+            信息排序</td>
+        </tr>
+        <tr id='node-941'  class="child-of-node-935">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='941' level='4'  onclick='javascript:checknode(this);'>
+            信息导入</td>
+        </tr>
+        <tr id='node-1008'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1008' level='3'  onclick='javascript:checknode(this);'>
+            视频专辑导入</td>
+        </tr>
+        <tr id='node-1076'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1076' level='3'  onclick='javascript:checknode(this);'>
+            更新html</td>
+        </tr>
+        <tr id='node-1202'  class="child-of-node-868">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1202' level='3'  onclick='javascript:checknode(this);'>
+            生成专题首页</td>
+        </tr>
+        <tr id='node-945'  class="child-of-node-821">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='945' level='2'  onclick='javascript:checknode(this);'>
+            碎片管理</td>
+        </tr>
+        <tr id='node-946'  class="child-of-node-945">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='946' level='3'  onclick='javascript:checknode(this);'>
+            添加碎片</td>
+        </tr>
+        <tr id='node-950'  class="child-of-node-945">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='950' level='3'  onclick='javascript:checknode(this);'>
+            编辑碎片</td>
+        </tr>
+        <tr id='node-951'  class="child-of-node-945">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='951' level='3'  onclick='javascript:checknode(this);'>
+            删除碎片</td>
+        </tr>
+        <tr id='node-952'  class="child-of-node-945">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='952' level='3'  onclick='javascript:checknode(this);'>
+            更新碎片</td>
+        </tr>
+        <tr id='node-953'  class="child-of-node-945">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='953' level='3'  onclick='javascript:checknode(this);'>
+            碎片还原</td>
+        </tr>
+        <tr id='node-954'  class="child-of-node-945">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='954' level='3'  onclick='javascript:checknode(this);'>
+            删除碎片历史</td>
+        </tr>
+        <tr id='node-957'  class="child-of-node-821">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='957' level='2'  onclick='javascript:checknode(this);'>
+            采集管理</td>
+        </tr>
+        <tr id='node-960'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='960' level='3'  onclick='javascript:checknode(this);'>
+            添加采集点</td>
+        </tr>
+        <tr id='node-962'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='962' level='3'  onclick='javascript:checknode(this);'>
+            编辑采集点</td>
+        </tr>
+        <tr id='node-963'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='963' level='3'  onclick='javascript:checknode(this);'>
+            删除采集点</td>
+        </tr>
+        <tr id='node-990'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='990' level='3'  onclick='javascript:checknode(this);'>
+            采集网址</td>
+        </tr>
+        <tr id='node-965'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='965' level='3'  onclick='javascript:checknode(this);'>
+            内容发布</td>
+        </tr>
+        <tr id='node-966'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='966' level='3'  onclick='javascript:checknode(this);'>
+            导入采集点</td>
+        </tr>
+        <tr id='node-967'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='967' level='3'  onclick='javascript:checknode(this);'>
+            导出采集点</td>
+        </tr>
+        <tr id='node-968'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='968' level='3'  onclick='javascript:checknode(this);'>
+            采集文章</td>
+        </tr>
+        <tr id='node-993'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='993' level='3'  onclick='javascript:checknode(this);'>
+            文章列表</td>
+        </tr>
+        <tr id='node-991'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='991' level='3'  onclick='javascript:checknode(this);'>
+            采集点复制</td>
+        </tr>
+        <tr id='node-992'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='992' level='3'  onclick='javascript:checknode(this);'>
+            删除文章</td>
+        </tr>
+        <tr id='node-994'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='994' level='3'  onclick='javascript:checknode(this);'>
+            添加导入方案</td>
+        </tr>
+        <tr id='node-995'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='995' level='3'  onclick='javascript:checknode(this);'>
+            文章导入方案删除</td>
+        </tr>
+        <tr id='node-996'  class="child-of-node-957">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='996' level='3'  onclick='javascript:checknode(this);'>
+            导入文章</td>
+        </tr>
+        <tr id='node-1509'  class="child-of-node-821">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1509' level='2'  onclick='javascript:checknode(this);'>
+            评论管理</td>
+        </tr>
+        <tr id='node-1510'  class="child-of-node-1509">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1510' level='3'  onclick='javascript:checknode(this);'>
+            评论审核</td>
+        </tr>
+        <tr id='node-873'  class="child-of-node-4">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='873' level='1'  onclick='javascript:checknode(this);'>
+            发布管理</td>
+        </tr>
+        <tr id='node-872'  class="child-of-node-873">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='872' level='2'  onclick='javascript:checknode(this);'>
+            同步到发布点</td>
+        </tr>
+        <tr id='node-877'  class="child-of-node-872">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='877' level='3'  onclick='javascript:checknode(this);'>
+            失败列表</td>
+        </tr>
+        <tr id='node-880'  class="child-of-node-872">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='880' level='3'  onclick='javascript:checknode(this);'>
+            删除消息</td>
+        </tr>
+        <tr id='node-905'  class="child-of-node-873">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='905' level='2'  onclick='javascript:checknode(this);'>
+            批量更新内容页</td>
+        </tr>
+        <tr id='node-906'  class="child-of-node-873">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='906' level='2'  onclick='javascript:checknode(this);'>
+            批量更新URL</td>
+        </tr>
+        <tr id='node-1002'  class="child-of-node-873">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1002' level='2'  onclick='javascript:checknode(this);'>
+            批量更新栏目页</td>
+        </tr>
+        <tr id='node-1243'  class="child-of-node-873">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1243' level='2'  onclick='javascript:checknode(this);'>
+            生成首页</td>
+        </tr>
+        <tr id='node-1501'  class="child-of-node-873">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1501' level='2'  onclick='javascript:checknode(this);'>
+            一键清理数据</td>
+        </tr>
+        <tr id='node-975'  class="child-of-node-4">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='975' level='1'  onclick='javascript:checknode(this);'>
+            内容相关设置</td>
+        </tr>
+        <tr id='node-32'  class="child-of-node-975">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='32' level='2'  onclick='javascript:checknode(this);'>
+            推荐位管理</td>
+        </tr>
+        <tr id='node-46'  class="child-of-node-32">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='46' level='3'  onclick='javascript:checknode(this);'>
+            添加推荐位</td>
+        </tr>
+        <tr id='node-961'  class="child-of-node-32">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='961' level='3'  onclick='javascript:checknode(this);'>
+            编辑推荐位</td>
+        </tr>
+        <tr id='node-43'  class="child-of-node-975">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='43' level='2'  onclick='javascript:checknode(this);'>
+            管理栏目</td>
+        </tr>
+        <tr id='node-42'  class="child-of-node-43">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='42' level='3'  onclick='javascript:checknode(this);'>
+            添加栏目</td>
+        </tr>
+        <tr id='node-44'  class="child-of-node-43">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='44' level='3'  onclick='javascript:checknode(this);'>
+            编辑栏目</td>
+        </tr>
+        <tr id='node-52'  class="child-of-node-43">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='52' level='3'  onclick='javascript:checknode(this);'>
+            更新栏目缓存</td>
+        </tr>
+        <tr id='node-998'  class="child-of-node-43">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='998' level='3'  onclick='javascript:checknode(this);'>
+            添加单网页</td>
+        </tr>
+        <tr id='node-999'  class="child-of-node-43">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='999' level='3'  onclick='javascript:checknode(this);'>
+            添加外部链接</td>
+        </tr>
+        <tr id='node-1000'  class="child-of-node-43">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1000' level='3'  onclick='javascript:checknode(this);'>
+            重新统计栏目数据</td>
+        </tr>
+        <tr id='node-1360'  class="child-of-node-43">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1360' level='3'  onclick='javascript:checknode(this);'>
+            批量编辑</td>
+        </tr>
+        <tr id='node-59'  class="child-of-node-975">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='59' level='2'  onclick='javascript:checknode(this);'>
+            模型管理</td>
+        </tr>
+        <tr id='node-62'  class="child-of-node-59">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='62' level='3'  onclick='javascript:checknode(this);'>
+            添加模型</td>
+        </tr>
+        <tr id='node-895'  class="child-of-node-59">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='895' level='3'  onclick='javascript:checknode(this);'>
+            导入模型</td>
+        </tr>
+        <tr id='node-1062'  class="child-of-node-59">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1062' level='3'  onclick='javascript:checknode(this);'>
+            字段管理</td>
+        </tr>
+        <tr id='node-1063'  class="child-of-node-59">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1063' level='3'  onclick='javascript:checknode(this);'>
+            修改模型</td>
+        </tr>
+        <tr id='node-1064'  class="child-of-node-59">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1064' level='3'  onclick='javascript:checknode(this);'>
+            禁用模型</td>
+        </tr>
+        <tr id='node-1065'  class="child-of-node-59">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1065' level='3'  onclick='javascript:checknode(this);'>
+            删除</td>
+        </tr>
+        <tr id='node-1066'  class="child-of-node-59">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1066' level='3'  onclick='javascript:checknode(this);'>
+            导出</td>
+        </tr>
+        <tr id='node-874'  class="child-of-node-975">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='874' level='2'  onclick='javascript:checknode(this);'>
+            类别管理</td>
+        </tr>
+        <tr id='node-875'  class="child-of-node-874">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='875' level='3'  onclick='javascript:checknode(this);'>
+            添加类别</td>
+        </tr>
+        <tr id='node-1067'  class="child-of-node-874">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1067' level='3'  onclick='javascript:checknode(this);'>
+            删除</td>
+        </tr>
+        <tr id='node-1068'  class="child-of-node-874">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1068' level='3'  onclick='javascript:checknode(this);'>
+            修改</td>
+        </tr>
+        <tr id='node-5' >
+          <td style='padding-left:30px;'><input type='checkbox' name='menuid[]' value='5' level='0'  onclick='javascript:checknode(this);'>
+            用户</td>
+        </tr>
+        <tr id='node-55'  class="child-of-node-5">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='55' level='1'  onclick='javascript:checknode(this);'>
+            会员管理</td>
+        </tr>
+        <tr id='node-74'  class="child-of-node-55">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='74' level='2'  onclick='javascript:checknode(this);'>
+            审核会员</td>
+        </tr>
+        <tr id='node-842'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='842' level='3'  onclick='javascript:checknode(this);'>
+            忽略列表</td>
+        </tr>
+        <tr id='node-841'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='841' level='3'  onclick='javascript:checknode(this);'>
+            已通过列表</td>
+        </tr>
+        <tr id='node-843'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='843' level='3'  onclick='javascript:checknode(this);'>
+            已删除用户</td>
+        </tr>
+        <tr id='node-844'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='844' level='3'  onclick='javascript:checknode(this);'>
+            拒绝列表</td>
+        </tr>
+        <tr id='node-845'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='845' level='3'  onclick='javascript:checknode(this);'>
+            无法通过</td>
+        </tr>
+        <tr id='node-1034'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1034' level='3'  onclick='javascript:checknode(this);'>
+            通过操作</td>
+        </tr>
+        <tr id='node-1035'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1035' level='3'  onclick='javascript:checknode(this);'>
+            删除操作</td>
+        </tr>
+        <tr id='node-1039'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1039' level='3'  onclick='javascript:checknode(this);'>
+            忽略操作</td>
+        </tr>
+        <tr id='node-1041'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1041' level='3'  onclick='javascript:checknode(this);'>
+            拒绝操作</td>
+        </tr>
+        <tr id='node-1102'  class="child-of-node-74">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1102' level='3'  onclick='javascript:checknode(this);'>
+            查看模型信息</td>
+        </tr>
+        <tr id='node-72'  class="child-of-node-55">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='72' level='2'  onclick='javascript:checknode(this);'>
+            会员管理</td>
+        </tr>
+        <tr id='node-81'  class="child-of-node-72">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='81' level='3'  onclick='javascript:checknode(this);'>
+            添加会员</td>
+        </tr>
+        <tr id='node-834'  class="child-of-node-72">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbnbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='834' level='3'  onclick='javascript:checknode(this);'>
+            锁定会员</td>
+        </tr>
+        <tr id='node-835'  class="child-of-node-72">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='835' level='3'  onclick='javascript:checknode(this);'>
+            解锁会员</td>
+        </tr>
+        <tr id='node-836'  class="child-of-node-72">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='836' level='3'  onclick='javascript:checknode(this);'>
+            移动会员</td>
+        </tr>
+        <tr id='node-837'  class="child-of-node-72">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='837' level='3'  onclick='javascript:checknode(this);'>
+            删除会员</td>
+        </tr>
+        <tr id='node-879'  class="child-of-node-72">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='879' level='3'  onclick='javascript:checknode(this);'>
+            搜索会员</td>
+        </tr>
+        <tr id='node-1048'  class="child-of-node-72">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1048' level='3'  onclick='javascript:checknode(this);'>
+            编辑会员</td>
+        </tr>
+        <tr id='node-1240'  class="child-of-node-72">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1240' level='3'  onclick='javascript:checknode(this);'>
+            查看会员信息</td>
+        </tr>
+        <tr id='node-839'  class="child-of-node-55">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='839' level='2'  onclick='javascript:checknode(this);'>
+            会员模块配置</td>
+        </tr>
+        <tr id='node-76'  class="child-of-node-5">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='76' level='1'  onclick='javascript:checknode(this);'>
+            会员组管理</td>
+        </tr>
+        <tr id='node-812'  class="child-of-node-76">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='812' level='2'  onclick='javascript:checknode(this);'>
+            管理会员组</td>
+        </tr>
+        <tr id='node-78'  class="child-of-node-812">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='78' level='3'  onclick='javascript:checknode(this);'>
+            添加会员组</td>
+        </tr>
+        <tr id='node-1049'  class="child-of-node-812">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1049' level='3'  onclick='javascript:checknode(this);'>
+            编辑会员组</td>
+        </tr>
+        <tr id='node-1051'  class="child-of-node-812">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1051' level='3'  onclick='javascript:checknode(this);'>
+            删除会员组</td>
+        </tr>
+        <tr id='node-850'  class="child-of-node-76">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='850' level='2'  onclick='javascript:checknode(this);'>
+            排序</td>
+        </tr>
+        <tr id='node-77'  class="child-of-node-5">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='77' level='1'  onclick='javascript:checknode(this);'>
+            会员模型管理</td>
+        </tr>
+        <tr id='node-80'  class="child-of-node-77">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='80' level='2'  onclick='javascript:checknode(this);'>
+            导入会员模型</td>
+        </tr>
+        <tr id='node-813'  class="child-of-node-77">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='813' level='2'  onclick='javascript:checknode(this);'>
+            管理会员模型</td>
+        </tr>
+        <tr id='node-79'  class="child-of-node-813">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='79' level='3'  onclick='javascript:checknode(this);'>
+            添加会员模型</td>
+        </tr>
+        <tr id='node-881'  class="child-of-node-813">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='881' level='3'  onclick='javascript:checknode(this);'>
+            删除会员模型</td>
+        </tr>
+        <tr id='node-882'  class="child-of-node-813">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='882' level='3'  onclick='javascript:checknode(this);'>
+            修改会员模型</td>
+        </tr>
+        <tr id='node-889'  class="child-of-node-813">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='889' level='3'  onclick='javascript:checknode(this);'>
+            添加会员模型字段</td>
+        </tr>
+        <tr id='node-890'  class="child-of-node-813">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='890' level='3'  onclick='javascript:checknode(this);'>
+            编辑会员模型字段</td>
+        </tr>
+        <tr id='node-891'  class="child-of-node-813">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='891' level='3'  onclick='javascript:checknode(this);'>
+            删除会员模型字段</td>
+        </tr>
+        <tr id='node-892'  class="child-of-node-813">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='892' level='3'  onclick='javascript:checknode(this);'>
+            会员模型字段管理</td>
+        </tr>
+        <tr id='node-1054'  class="child-of-node-77">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1054' level='2'  onclick='javascript:checknode(this);'>
+            导出会员模型</td>
+        </tr>
+        <tr id='node-1055'  class="child-of-node-77">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1055' level='2'  onclick='javascript:checknode(this);'>
+            会员模型排序</td>
+        </tr>
+        <tr id='node-1056'  class="child-of-node-77">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1056' level='2'  onclick='javascript:checknode(this);'>
+            移动模型会员</td>
+        </tr>
+        <tr id='node-6' >
+          <td style='padding-left:30px;'><input type='checkbox' name='menuid[]' value='6' level='0'  onclick='javascript:checknode(this);'>
+            界面</td>
+        </tr>
+        <tr id='node-826'  class="child-of-node-6">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='826' level='1'  onclick='javascript:checknode(this);'>
+            模板管理</td>
+        </tr>
+        <tr id='node-827'  class="child-of-node-826">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='827' level='2'  onclick='javascript:checknode(this);'>
+            模板风格</td>
+        </tr>
+        <tr id='node-828'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='828' level='3'  onclick='javascript:checknode(this);'>
+            导入风格</td>
+        </tr>
+        <tr id='node-831'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='831' level='3'  onclick='javascript:checknode(this);'>
+            导出风格</td>
+        </tr>
+        <tr id='node-830'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='830' level='3'  onclick='javascript:checknode(this);'>
+            模板文件</td>
+        </tr>
+        <tr id='node-832'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='832' level='3'  onclick='javascript:checknode(this);'>
+            开关风格</td>
+        </tr>
+        <tr id='node-833'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='833' level='3'  onclick='javascript:checknode(this);'>
+            更新风格中文名</td>
+        </tr>
+        <tr id='node-846'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='846' level='3'  onclick='javascript:checknode(this);'>
+            模板文件列表</td>
+        </tr>
+        <tr id='node-847'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='847' level='3'  onclick='javascript:checknode(this);'>
+            模板文件编辑</td>
+        </tr>
+        <tr id='node-848'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='848' level='3'  onclick='javascript:checknode(this);'>
+            新建模板文件</td>
+        </tr>
+        <tr id='node-869'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='869' level='3'  onclick='javascript:checknode(this);'>
+            模板编辑</td>
+        </tr>
+        <tr id='node-870'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='870' level='3'  onclick='javascript:checknode(this);'>
+            模板可视化</td>
+        </tr>
+        <tr id='node-871'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='871' level='3'  onclick='javascript:checknode(this);'>
+            编辑PC标签</td>
+        </tr>
+        <tr id='node-942'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='942' level='3'  onclick='javascript:checknode(this);'>
+            历史版本</td>
+        </tr>
+        <tr id='node-943'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='943' level='3'  onclick='javascript:checknode(this);'>
+            还原历史版本</td>
+        </tr>
+        <tr id='node-944'  class="child-of-node-827">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='944' level='3'  onclick='javascript:checknode(this);'>
+            删除历史版本</td>
+        </tr>
+        <tr id='node-1566'  class="child-of-node-826">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1566' level='2'  onclick='javascript:checknode(this);'>
+            标签向导</td>
+        </tr>
+        <tr id='node-1567'  class="child-of-node-1566">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1567' level='3'  onclick='javascript:checknode(this);'>
+            添加标签向导</td>
+        </tr>
+        <tr id='node-1568'  class="child-of-node-1566">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1568' level='3'  onclick='javascript:checknode(this);'>
+            修改标签向导</td>
+        </tr>
+        <tr id='node-1569'  class="child-of-node-1566">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1569' level='3'  onclick='javascript:checknode(this);'>
+            删除标签向导</td>
+        </tr>
+        <tr id='node-1570'  class="child-of-node-1566">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1570' level='3'  onclick='javascript:checknode(this);'>
+            标签向导列表</td>
+        </tr>
+        <tr id='node-10' >
+          <td style='padding-left:30px;'><input type='checkbox' name='menuid[]' value='10' level='0'  onclick='javascript:checknode(this);'>
+            我的面板</td>
+        </tr>
+        <tr id='node-970'  class="child-of-node-10">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='970' level='1'  onclick='javascript:checknode(this);'>
+            个人信息</td>
+        </tr>
+        <tr id='node-971'  class="child-of-node-970">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='971' level='2'  onclick='javascript:checknode(this);'>
+            修改密码</td>
+        </tr>
+        <tr id='node-972'  class="child-of-node-970">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='972' level='2'  onclick='javascript:checknode(this);'>
+            修改个人信息</td>
+        </tr>
+        <tr id='node-1003'  class="child-of-node-10">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1003' level='1'  onclick='javascript:checknode(this);'>
+            生成操作</td>
+        </tr>
+        <tr id='node-1004'  class="child-of-node-1003">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1004' level='2'  onclick='javascript:checknode(this);'>
+            生成首页</td>
+        </tr>
+        <tr id='node-7' >
+          <td style='padding-left:30px;'><input type='checkbox' name='menuid[]' value='7' level='0'  onclick='javascript:checknode(this);'>
+            扩展</td>
+        </tr>
+        <tr id='node-977'  class="child-of-node-7">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='977' level='1'  onclick='javascript:checknode(this);'>
+            扩展</td>
+        </tr>
+        <tr id='node-31'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='31' level='2'  onclick='javascript:checknode(this);'>
+            菜单管理</td>
+        </tr>
+        <tr id='node-35'  class="child-of-node-31">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='35' level='3'  onclick='javascript:checknode(this);'>
+            添加菜单</td>
+        </tr>
+        <tr id='node-1072'  class="child-of-node-31">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1072' level='3'  onclick='javascript:checknode(this);'>
+            修改</td>
+        </tr>
+        <tr id='node-1073'  class="child-of-node-31">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1073' level='3'  onclick='javascript:checknode(this);'>
+            删除</td>
+        </tr>
+        <tr id='node-45'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='45' level='2'  onclick='javascript:checknode(this);'>
+            敏感词管理</td>
+        </tr>
+        <tr id='node-66'  class="child-of-node-45">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='66' level='3'  onclick='javascript:checknode(this);'>
+            敏感词导出</td>
+        </tr>
+        <tr id='node-68'  class="child-of-node-45">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='68' level='3'  onclick='javascript:checknode(this);'>
+            批量导入</td>
+        </tr>
+        <tr id='node-931'  class="child-of-node-45">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='931' level='3'  onclick='javascript:checknode(this);'>
+            添加敏感词</td>
+        </tr>
+        <tr id='node-932'  class="child-of-node-45">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='932' level='3'  onclick='javascript:checknode(this);'>
+            编辑敏感词</td>
+        </tr>
+        <tr id='node-933'  class="child-of-node-45">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='933' level='3'  onclick='javascript:checknode(this);'>
+            删除敏感词</td>
+        </tr>
+        <tr id='node-867'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='867' level='2'  onclick='javascript:checknode(this);'>
+            联动菜单</td>
+        </tr>
+        <tr id='node-876'  class="child-of-node-867">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='876' level='3'  onclick='javascript:checknode(this);'>
+            添加菜单</td>
+        </tr>
+        <tr id='node-885'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='885' level='2'  onclick='javascript:checknode(this);'>
+            工作流</td>
+        </tr>
+        <tr id='node-888'  class="child-of-node-885">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='888' level='3'  onclick='javascript:checknode(this);'>
+            添加工作流</td>
+        </tr>
+        <tr id='node-1074'  class="child-of-node-885">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1074' level='3'  onclick='javascript:checknode(this);'>
+            修改</td>
+        </tr>
+        <tr id='node-1075'  class="child-of-node-885">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1075' level='3'  onclick='javascript:checknode(this);'>
+            删除</td>
+        </tr>
+        <tr id='node-914'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='914' level='2'  onclick='javascript:checknode(this);'>
+            数据库工具</td>
+        </tr>
+        <tr id='node-915'  class="child-of-node-914">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='915' level='3'  onclick='javascript:checknode(this);'>
+            数据库导出</td>
+        </tr>
+        <tr id='node-916'  class="child-of-node-914">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='916' level='3'  onclick='javascript:checknode(this);'>
+            数据库导入</td>
+        </tr>
+        <tr id='node-978'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='978' level='2'  onclick='javascript:checknode(this);'>
+            URL规则管理</td>
+        </tr>
+        <tr id='node-1069'  class="child-of-node-978">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1069' level='3'  onclick='javascript:checknode(this);'>
+            添加规则</td>
+        </tr>
+        <tr id='node-1070'  class="child-of-node-978">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1070' level='3'  onclick='javascript:checknode(this);'>
+            编辑规则</td>
+        </tr>
+        <tr id='node-1071'  class="child-of-node-978">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1071' level='3'  onclick='javascript:checknode(this);'>
+            删除</td>
+        </tr>
+        <tr id='node-969'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='969' level='2'  onclick='javascript:checknode(this);'>
+            Sitemaps</td>
+        </tr>
+        <tr id='node-973'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='973' level='2'  onclick='javascript:checknode(this);'>
+            关联链接</td>
+        </tr>
+        <tr id='node-974'  class="child-of-node-973">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='974' level='3'  onclick='javascript:checknode(this);'>
+            添加关联链接</td>
+        </tr>
+        <tr id='node-1026'  class="child-of-node-973">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1026' level='3'  onclick='javascript:checknode(this);'>
+            删除关联链接</td>
+        </tr>
+        <tr id='node-1027'  class="child-of-node-973">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1027' level='3'  onclick='javascript:checknode(this);'>
+            编辑关联链接</td>
+        </tr>
+        <tr id='node-983'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='983' level='2'  onclick='javascript:checknode(this);'>
+            IP禁止</td>
+        </tr>
+        <tr id='node-984'  class="child-of-node-983">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='984' level='3'  onclick='javascript:checknode(this);'>
+            添加IP禁止</td>
+        </tr>
+        <tr id='node-1024'  class="child-of-node-983">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1024' level='3'  onclick='javascript:checknode(this);'>
+            删除IP禁止</td>
+        </tr>
+        <tr id='node-989'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='989' level='2'  onclick='javascript:checknode(this);'>
+            下载镜像管理</td>
+        </tr>
+        <tr id='node-997'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='997' level='2'  onclick='javascript:checknode(this);'>
+            后台操作日志</td>
+        </tr>
+        <tr id='node-1023'  class="child-of-node-997">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1023' level='3'  onclick='javascript:checknode(this);'>
+            删除日志</td>
+        </tr>
+        <tr id='node-1001'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1001' level='2'  onclick='javascript:checknode(this);'>
+            更新全站缓存</td>
+        </tr>
+        <tr id='node-1005'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1005' level='2'  onclick='javascript:checknode(this);'>
+            木马查杀</td>
+        </tr>
+        <tr id='node-1006'  class="child-of-node-1005">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1006' level='3'  onclick='javascript:checknode(this);'>
+            查杀报告</td>
+        </tr>
+        <tr id='node-1007'  class="child-of-node-1005">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1007' level='3'  onclick='javascript:checknode(this);'>
+            生成md5</td>
+        </tr>
+        <tr id='node-1239'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1239' level='2'  onclick='javascript:checknode(this);'>
+            来源管理</td>
+        </tr>
+        <tr id='node-1349'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1349' level='2'  onclick='javascript:checknode(this);'>
+            前台菜单管理</td>
+        </tr>
+        <tr id='node-1350'  class="child-of-node-1349">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1350' level='3'  onclick='javascript:checknode(this);'>
+            添加菜单</td>
+        </tr>
+        <tr id='node-1351'  class="child-of-node-1349">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;├─
+            <input type='checkbox' name='menuid[]' value='1351' level='3'  onclick='javascript:checknode(this);'>
+            编辑菜单</td>
+        </tr>
+        <tr id='node-1352'  class="child-of-node-1349">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ &nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1352' level='3'  onclick='javascript:checknode(this);'>
+            删除菜单</td>
+        </tr>
+        <tr id='node-1564'  class="child-of-node-977">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1564' level='2'  onclick='javascript:checknode(this);'>
+            在线升级</td>
+        </tr>
+        <tr id='node-1565'  class="child-of-node-1564">
+          <td style='padding-left:30px;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─
+            <input type='checkbox' name='menuid[]' value='1565' level='3'  onclick='javascript:checknode(this);'>
+            文件校验</td>
+        </tr>
+        <tr id='node-8' >
+          <td style='padding-left:30px;'><input type='checkbox' name='menuid[]' value='8' level='0'  onclick='javascript:checknode(this);'>
+            phpsso</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="btn">
+      <input type="submit"  class="button" name="dosubmit" id="dosubmit" value="提交" />
+    </div>
+  </form>
+</div>
+</body>
+</html>

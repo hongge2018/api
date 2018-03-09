@@ -1,0 +1,33 @@
+<include file="Public/header" />
+<form name="myform" action="?m=admin&c=menu&a=listorder" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="100">id</th>
+            <th>名字</th>
+            <th width="120">时间</th>
+            <th width="100">管理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="list" id="vo">
+            <tr>
+              <td align='center'>{$vo.id}</td>
+              <td >{$vo.name}</td>
+              <td >{$vo.inputtime|date="Y-m-d H:i:s",###}</td>
+              <td align='center'><a href="{:U('season_edit',array('id'=>$vo['id'],'menuid'=>$menuid))}">修改</a> | <a href="{:U('season_delete',array('id'=>$vo['id'],'menuid'=>$menuid))}">删除</a></td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="排序" />
+      </div>
+      <div id="pages"> {$page} </div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

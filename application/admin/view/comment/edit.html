@@ -1,0 +1,99 @@
+{include file="common/header" /}
+<form name="myform" id="myform" action="" method="post">
+  <table width="100%" class="table_form contentWrap">
+    <tr>
+      <th width="150">标题：</th>
+      <td><input type="text" name="title" id="title" class="input-text" style="width:500px;" value="{$title}"></td>
+    </tr>  
+    <tr>
+      <th>出发地：</th>
+      <td><select name="chu_area" style="width:200px;" required id="chu_area">
+          <option value="">请选择出发地</option>
+          <?php echo $select_chufa;?>
+      </select></td>
+    </tr>
+     
+    <tr>
+      <th>目的地：</th>
+      <td><select name="mudi_area" style="width:200px;" required id="mudi_area" onchange="get_hotelid()">
+          <option value="">请选择目的地</option>
+          <?php echo $select_mudi;?>
+      </select></td>
+    </tr> 
+    <tr>
+      <th>所住酒店：</th>
+      <td><select name="hotelid" style="width:200px;" required id="hotelid">
+          <option value="0">请选择酒店</option>     
+      </select></td>
+    </tr> 
+    <tr>
+      <th>缩略图：</th>
+      <td>{;input_thumb()}</td>
+    </tr>    
+     <tr>
+      <th>出发时间：</th>
+      <td>{:input_date()}</td>
+    </tr>        
+    
+     <tr>
+      <th>出发天数：</th>
+      <td><input type="text" name="days" id="days" class="input-text" value="{$days}"> 天</td>
+    </tr>  
+      <tr>
+      <th>人物：</th>
+      <td><input type="text" name="renwu" id="renwu" class="input-text" style="width:500px;" value="{$renwu}"></td>
+    </tr>
+      <tr>
+      <th>人均花费：</th>
+      <td><input type="text" name="per_spend" id="per_spend" class="input-text" value="{$per_spend}"> 元</td>
+    </tr>    
+    <tr>
+      <th>任性前言：</th>
+      <td>{:editor('preface',['value'=>$preface])}</td>
+    </tr>
+    <tr>
+      <th>关于行程：</th>
+      <td>{:editor('tour',['value'=>$tour,'is_load'=>0])}</td>
+    </tr>
+    <tr>
+      <th>行前准备：</th>
+      <td>{:editor('ready',['value'=>$ready,'is_load'=>0])}</td>
+    </tr>
+     <tr>
+      <th>关于购物：</th>
+      <td>{:editor('shoping',['value'=>$shoping,'is_load'=>0])}</td>
+    </tr>
+       
+     <tr>
+      <th>关于交通：</th>
+      <td>{:editor('jiaotong',['value'=>$jiaotong,'is_load'=>0])}</td>
+    </tr>
+     <tr>
+      <th>特殊民俗：</th>
+      <td>{:editor('folk',['value'=>$folk,'is_load'=>0])}</td>
+    </tr>      
+    
+    <tr>
+      <th>关于花费：</th>
+      <td>{:editor('spend',['value'=>$spend,'is_load'=>0])}</td>
+    </tr>
+  </table>
+  <!--table_form_off-->
+  </div>
+  <div class="bk15"></div>
+  <div class="btn">
+  <input name="id" type="hidden" value="{$id}" />
+    <input type="submit" id="dosubmit" class="button" name="dosubmit" value="提交"/>
+  </div>
+  </div>
+</form>
+<script>
+ get_hotelid();
+ function get_hotelid() {		
+	var linkageid = $("#mudi_area option:selected").val();
+	$.post('{:U('get_hotelid')}',{linkageid:linkageid,hotelid:{$hotelid}}, function (data) {
+		$('#hotelid').html(data);         
+	})
+}
+</script>
+</body></html>

@@ -1,0 +1,35 @@
+{include file="common/header" /}
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+      <table width="100%" class="table_form contentWrap">
+        <tr>
+          <td width="80">用户名</td>
+          <td>{$username}</td>
+        </tr>
+        <tr>
+          <td width="80">最后登录时间</td>
+          <td>{$lastlogintime|date="Y-m-d h:i:s",###}</td>
+        </tr>
+        <tr>
+          <td width="80">最后登录IP</td>
+          <td>{$lastloginip}</td>
+        </tr>
+        <tr>
+          <td>真实姓名</td>
+          <td><input type="text" name="realname" id="realname" class="input-text" size="30" value="{$realname}">
+            </input></td>
+        </tr>
+        <tr>
+          <td>E-mail</td>
+          <td><input type="text" name="email" id="email" class="input-text" size="30" value="{$email}">
+            </input></td>
+        </tr>
+      </table>
+      <div class="bk15"></div>
+      <input name="userid" type="hidden" id="userid" value="{$userid}">
+      <input name="dosubmit" type="submit" value="提交" class="button" id="dosubmit">
+    </form>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,36 @@
+{include file="common/header" /}
+<div class="pad_10">
+  <div class="common-form">
+    <form name="myform" action="" method="post" id="myform">
+      <table width="100%" class="table_form contentWrap">
+        <tr>
+          <td width="80">用户名</td>
+          <td><input type="text" name="username" id="username" class="input-text" size="30" value=""></td>
+        </tr>
+        <tr>
+          <td width="80">密码</td>
+          <td><input type="password" name="password" id="password" class="input-text" size="30" value=""></td>
+        </tr>
+        <tr>
+          <td width="80">角色组</td>
+          <td><select name="roleid" id="roleid" >
+              {volist name="rulelist" id="data"}
+              <option value='{$data.id}' >{$data.title}</option>
+              {/volist}   
+            </select></td>
+        </tr>
+        <tr>
+          <td>真实姓名</td>
+          <td><input type="text" name="realname" id="realname" class="input-text" size="30" value="" /></td>
+        </tr>
+        <tr>
+          <td>E-mail</td>
+          <td><input type="text" name="email" id="email" class="input-text" size="30" value="" /></td>
+        </tr>
+      </table>
+      <div class="bk15"></div>
+      <input name="dosubmit" type="submit" value="提交" class="button" id="dosubmit">
+    </form>
+  </div>
+</div>
+</body></html>

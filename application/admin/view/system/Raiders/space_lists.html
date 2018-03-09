@@ -1,0 +1,33 @@
+<include file="Public/header" />
+<form name="myform" action="" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="100">id</th>
+            <th>排序</th>
+            <th>名称</th>
+            <th width="200">管理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <volist name="list" id="vo">
+            <tr>
+              <td align='center'>{$vo.spaceid}</td>
+              <td align='center'><input name='listorders[{$vo.spaceid}]' type='text' size='3' value='{$vo.listorder}' class='input-text-c'></td>
+              <td >{$vo.name}</td>
+              <td align='center'><a href="{:U('poster_lists',array('spaceid'=>$vo['spaceid']))}">图片列表</a> | <a href="{:U('space_edit',array('spaceid'=>$vo['spaceid'],'menuid'=>$menuid))}">修改</a> | <a href="{:U('space_delete',array('spaceid'=>$vo['spaceid'],'menuid'=>$menuid))}">删除</a> | <a href="{:U('poster_add',array('spaceid'=>$vo['spaceid']))}">添加图片</a></td>
+            </tr>
+          </volist>
+        </tbody>
+      </table>
+      <div class="btn">
+        <input type="button" class="button" value="排序" onclick="myform.action='{:U('space_listorder')}';myform.submit();"/>
+      </div>
+      <div id="pages"> {$page} </div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

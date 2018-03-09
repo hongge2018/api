@@ -1,0 +1,51 @@
+{include file="common/header" /}
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> <a href='javascript:;' class="on"><em>广告列表</em></a><span>|</span><a href='{:url('poster_add',array('spaceid'=>$spaceid))}'><em>添加广告</em></a></div>
+</div>
+<form name="myform" action="{:url('listorder')}" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+          	<th width="38">排序</th>
+            <th width="100">id</th>
+            <th>名字</th>
+            <th>类型</th>
+            <th>链接</th>
+            <th>说明</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+            <th>是否显示</th>
+            <th width="120">时间</th>
+            <th width="100">管理</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        {volist name="list" id="vo"}
+        <tr>
+        	<td><input name='listorders[{$vo.id}]' type='text' size='3' value='{$vo.listorder}' class='input'></td>
+          <td align='center'>{$vo.id}</td>
+          <td >{$vo.name}</td>
+          <td >{eq name="vo.type" value="img"}图片{else/}动画{/eq}</td>
+          <td >{$vo.url}</td>
+          <td >{$vo.remark}</td>
+          <td >{:format_date($vo.startdate)}</td>
+          <td >{:format_date($vo.enddate)}</td>
+          <td >{eq name="vo.display" value="1"}是{else/}否{/eq}</td>
+          <td >{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+          <td align='center'><a href="{:url('poster_edit',array('id'=>$vo['id'],'menuid'=>$menuid))}">修改</a> | <a href="{:url('poster_delete',array('id'=>$vo['id'],'menuid'=>$menuid))}">删除</a></td>
+        </tr>
+        {/volist}
+          </tbody>
+        
+      </table>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="排序" />
+      </div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

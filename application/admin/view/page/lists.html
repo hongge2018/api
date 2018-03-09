@@ -1,0 +1,45 @@
+{include file="common/header" /}
+<form name="myform" action="{:url('listorder')}" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+          <th width="38">排序</th>
+            <th width="100">id</th>
+            <th>标题</th>
+            <th>标识</th>
+            <th>添加时间</th>
+            <th>更新时间</th>
+            <th width="150">管理</th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        {volist name="list" id="vo"}
+        <tr>
+          <td><input name='listorders[{$vo.id}]' type='text' size='3' value='{$vo.listorder}' class='input'></td>
+          <td align='center'>{$vo.id}</td>
+          <td align='center'>{$vo.title}</td>
+          <td align='center'>{$vo.sid}</td>
+          <td align='center'>{$vo.create_time|date="Y-m-d H:i:s",###}</td>
+          <td align='center'>{$vo.update_time|date="Y-m-d H:i:s",###}</td>
+          <td align='center'><a href="{:url('edit',['id'=>$vo['id'],'menuid'=>$menuid])}">修改</a> | <a href="{:url('Home/Page/'.$vo['sid'])}" target="_blank">查看</a> | <a href="javascript:confirmurl('{:url('delete',['id'=>$vo['id'],'menuid'=>$menuid])}','确认要删除吗？')">删除</a></td>
+        </tr>
+        {/volist}
+        <tr>
+          <td colspan="6">使用说明：标识对应单页地址  如果想添加一个页面如：{:url('Home/Page/tel')}, 标识填写：tel 即可</td>
+        </tr>
+          </tbody>
+        
+      </table>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="排序" />
+      </div>
+      <div class="bk10"></div>
+      <div id="pages">{$list->render()}</div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

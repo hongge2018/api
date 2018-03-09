@@ -1,0 +1,51 @@
+<include file="Public/header" />
+<div class="subnav">
+  <div class="content-menu ib-a blue line-x"> <a href='{:U('poster_lists',array('spaceid'=>$spaceid))}'><em>图片列表</em></a><span>|</span><a href='javascript:;' class="on"><em>添加图片</em></a> </div>
+</div>
+</div>
+
+<form name="myform" id="myform" action="" method="post">
+  <table width="100%" class="table_form contentWrap">
+    <tr>
+      <th>标题：</th>
+      <td><input type="text" name="name" id="name" class="input-text" style="width:500px;" value="{$name}" required></td>
+    </tr>
+    <tr>
+      <th>地址：</th>
+      <td><input type="text" name="address" id="address" class="input-text" style="width:200px;" value="{$address}"> 如：大永谷-芦之湖</td>
+    </tr>
+    <tr>
+      <th>天数：</th>
+      <td><input type="text" name="days" id="days" class="input-text" style="width:200px;" value="{$days}" required> 请填写数字</td>
+    </tr>
+
+    <tr>
+      <th>排序：</th>
+      <td><input type="text" name="listorder" id="listorder" class="input-text" style="width:200px;" value="{$listorder}" required> 请填写数字，数字越小越靠前</td>
+    </tr>
+    <tr>
+      <th>链接地址：</th>
+      <td><input type="text" name="img_url" id="img_url" class="input-text" style="width:500px;" value="{$img_url}" required></td>
+    </tr>   
+        <tr>
+      <th>简介：</th>
+      <td><textarea name="content" style="width:500px;height:120px;">{$content}</textarea></td>
+    </tr> 
+    
+        <tr>
+      <th>图片：</th>
+      <td colspan="3"><input type='hidden' name='thumb' id='thumb' value='{$thumb}'>
+        <a href='javascript:void(0);' onclick="open_thumb('{:U('Attachment/Plupload/plupload')}', '缩略图');return false;"> <img src='<empty name="thumb">__IMG__/icon/upload-pic.png<else/>__ROOT__/Uploads/{$thumb}</empty>' id='thumb_preview' width='135' height='113' style='cursor:hand;' /></a></td>
+    </tr>
+  </table>
+  <!--table_form_off-->
+  </div>
+  <div class="bk15"></div>
+  <div class="btn">
+  <input name="id" type="hidden" id="id" value="{$id}" />
+  <input name="spaceid" type="hidden" value="{$spaceid}" />
+    <input type="submit" id="dosubmit" class="button" name="dosubmit" value="提交"/>
+  </div>
+  </div>
+</form>
+</body></html>

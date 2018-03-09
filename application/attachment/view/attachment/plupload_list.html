@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Plupload上传</title>
+<link href="__JS__/swfupload/swfupload.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="__JS__/jquery.min.js"></script> 
+<script type="text/javascript" src="__JS__/plupload/plupload.full.min.js"></script> 
+<!-- debug 
+<script type="text/javascript" src="__JS__/plupload/moxie.js"></script>
+<script type="text/javascript" src="__JS__/plupload/plupload.dev.js"></script>
+--> 
+
+</head>
+<body>
+<div class="col-tab">
+  <ul class="tabBut cu-li">
+    <li id="tab_swf_1"  class="on" onclick="SwapTab('swf','on','',5,1);">上传附件</li>
+    <li id="tab_swf_2" onclick="SwapTab('swf','on','',5,2);">网络文件</li>
+<!--    <li id="tab_swf_3" onclick="SwapTab('swf','on','',5,3);set_iframe('album_list','index.php?m=attachment&c=attachments&a=album_load&args=1,jpg|jpeg|gif|png|bmp,1,,,0');">图库</li>
+    <li id="tab_swf_4" onclick="SwapTab('swf','on','',5,4);set_iframe('album_dir','index.php?m=attachment&c=attachments&a=album_dir&args=1,jpg|jpeg|gif|png|bmp,1,,,0');">目录浏览</li>-->
+    <li id="tab_swf_5" class="on icon" onclick="SwapTab('swf','on','',5,5);">未处理文件</li>
+  </ul>
+  <div id="div_swf_1" class="content pad-10 ">
+    <div>
+      <div class="addnew" id="addnew"> <span id="buttonPlaceHolder"></span> </div>
+      <input type="button" id="btupload" value="开始上传" />
+      <div id="nameTip" class="onShow">最多上传<font color="red"> 1</font> 个附件,单文件最大 <font color="red">2 MB</font></div>
+      <div class="bk3"></div>
+      <div class="lh24">支持 <font style="font-family: Arial, Helvetica, sans-serif">jpg、jpeg、gif、png、bmp</font> 格式。</div>
+      <!--<input type="checkbox" id="watermark_enable" value="1"  onclick="change_params()">
+      是否添加水印 --></div>
+    <div class="bk10"></div>
+    <fieldset class="blue pad-10" id="swfupload">
+      <legend>列表</legend>
+      <ul class="attachment-list"  id="fsUploadProgress">
+      </ul>
+    </fieldset>
+  </div>
+  <div id="div_swf_2" class="contentList pad-10 hidden">
+    <div class="bk10"></div>
+    请输入网络地址
+    <div class="bk3"></div>
+    <input type="text" name="info[filename]" class="input-text" value=""  style="width:350px;"  onblur="addonlinefile(this)">
+    <div class="bk10"></div>
+  </div>
+  <div id="div_swf_3" class="contentList pad-10 hidden">
+    <ul class="attachment-list">
+      <iframe name="album-list" src="#" frameborder="false" scrolling="no" style="overflow-x:hidden;border:none" width="100%" height="345" allowtransparency="true" id="album_list"></iframe>
+    </ul>
+  </div>
+  <div id="div_swf_4" class="contentList pad-10 hidden">
+    <ul class="attachment-list">
+      <iframe name="album-dir" src="#" frameborder="false" scrolling="auto" style="overflow-x:hidden;border:none" width="100%" height="330" allowtransparency="true" id="album_dir"></iframe>
+    </ul>
+  </div>
+  <div id="div_swf_5" class="contentList pad-10 hidden">
+    <div class="explain-col">上次上传未处理的附件，如使用请点击选择。</div>
+    <ul class="attachment-list" id="album">
+      <li>
+        <div class="img-wrap"> <a onclick="javascript:album_cancel(this,2,'http://www.phpcms.com/uploadfile/2016/1008/20161008020415683.png')" href="javascript:;" class="off"  title="code.png">
+          <div class="icon"></div>
+          <img width="80"  path="http://www.phpcms.com/uploadfile/2016/1008/20161008020415683.png" src="http://www.phpcms.com/uploadfile/2016/1008/20161008020415683.png" title="code.png"></a> </div>
+      </li>
+    </ul>
+  </div>
+  <div id="att-status" class="hidden"></div>
+  <div id="att-status-del" class="hidden"></div>
+  <div id="att-name" class="hidden"></div>
+  <!-- swf --> 
+</div>
+
+<!--<div class="upload clearfix">
+ <div class="addnew" id="addnew"><input type="button" id="btn" value="开始上传" /></div>
+  <ul id="ul_pics" class="ul_pics clearfix">
+    
+  </ul>
+  <input id="filename" name="filename" type="hidden" value="" />
+</div>--> 
+
+
+<script type="text/javascript">
+	var uploader = new plupload.Uploader({
+		runtimes: 'flash,silverlight,html4', 
+		browse_button: 'btupload', 
+		url: "{:url('pluploadImg')}", 
+		flash_swf_url: '__JS__/plupload/Moxie.swf', 
+		silverlight_xap_url: '__JS__/plupload/Moxie.xap', 
+		filters: {max_file_size: '2mb',mime_types: [{title: "files", extensions: "jpg,png,gif,jpeg"}]},
+		multi_selection: false, //true:ctrl多文件上传, false 单文件上传
+		init: {
+			FilesAdded: function(up, files) { //文件上传前
+				if ($("#fsUploadProgress").children("li").length > 100) {
+					alert("缩略图只允许上传一张！");
+					uploader.destroy();
+				} else {
+					var li = '';
+					plupload.each(files, function(file) { //遍历文件
+						li += "<li id='" + file['id'] + "'><div class='progress'><span class='bar'></span><span class='percent'>0%</span></div></li>";
+					});
+					$("#fsUploadProgress").prepend(li);
+					uploader.start();
+				}
+			},
+			UploadProgress: function(up, file) { //上传中，显示进度条
+				var percent = file.percent;
+				$("#" + file.id).find('.bar').css({"width": percent + "%"});
+				$("#" + file.id).find(".percent").text(percent + "%");
+			},
+			FileUploaded: function(up, file, info) { //文件上传成功的时候触发
+				var data = eval("(" + info.response + ")");//解析返回的json数据
+				var pic_url= '/uploads/'+data.pic;
+				$("#" + file.id).html("<input type='hidden'name='pic[]' value='" + pic_url + "'/><input type='hidden'name='pic_name[]' value='" + data.name + "'/><img class='img_common' onclick=delPic('" + pic_url + "','" + file.id + "') src='" + pic_url + "'/>");//追加图片
+				$('#filename').val(pic_url);
+								
+			},
+			Error: function(up, err) { //上传出错的时候触发
+				alert(err.message);
+			}
+		}
+	});
+	uploader.init();
+
+	function delPic(pic, file_id) { //删除图片 参数1图片路径  参数2 随机数
+		if (confirm("确定要删除吗？")) {
+			$.post("{:url('plupload_del')}", {pic: pic}, function(data) {
+				$("#" + file_id).remove()
+			})
+		}
+	}
+function SwapTab(name,cls_show,cls_hide,cnt,cur) {
+    for(i=1;i<=cnt;i++){
+		if(i==cur){
+			 $('#div_'+name+'_'+i).show();
+			 $('#tab_'+name+'_'+i).addClass(cls_show);
+			 $('#tab_'+name+'_'+i).removeClass(cls_hide);
+		}else{
+			 $('#div_'+name+'_'+i).hide();
+			 $('#tab_'+name+'_'+i).removeClass(cls_show);
+			 $('#tab_'+name+'_'+i).addClass(cls_hide);
+		}
+	}
+}
+	
+</script>
+</body>
+</html>

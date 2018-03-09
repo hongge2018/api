@@ -1,0 +1,35 @@
+{include file="common/header" /} 
+<form name="myform" action="" method="post">
+  <div class="pad-lr-10">
+    <div class="table-list">
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th width="100">id</th>
+            <th>分类</th>
+            <th>长度</th>
+            <th>宽度</th>
+            <th width="200">管理</th>
+          </tr>
+        </thead>
+        <tbody>
+          {volist name="list" id="vo"}
+            <tr>
+              <td align='center'>{$vo.spaceid}</td>
+              <td >{$vo.name}</td>
+              <td >{$vo.height}</td>
+              <td >{$vo.width}</td>
+              <td align='center'><a href="{:url('poster_lists',array('spaceid'=>$vo['spaceid']))}">广告列表</a> | <a href="{:url('space_edit',array('spaceid'=>$vo['spaceid'],'menuid'=>$menuid))}">修改</a> | <a href="{:url('space_delete',array('spaceid'=>$vo['spaceid'],'menuid'=>$menuid))}">删除</a> | <a href="{:url('poster_add',array('spaceid'=>$vo['spaceid']))}">添加广告</a></td>
+            </tr>
+          {/volist}
+        </tbody>
+      </table>
+      <div class="btn">
+        <input type="submit" class="button" name="dosubmit" value="排序" />
+      </div>
+      <div id="pages"> {$list->render()} </div>
+    </div>
+  </div>
+  </div>
+</form>
+</body></html>

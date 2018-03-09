@@ -1,0 +1,20 @@
+{include file="common/header" /}
+
+</head>
+<body>
+<style type="text/css">
+	html{_overflow-y:scroll}
+</style>
+
+<div class="table-list" id="load_priv">
+  <form name="myform" action="" method="post">
+    <input type="hidden" name="roleid" id="roleid" value="{$groupid}" />
+    <table  class="layui-table">
+      <tbody>
+      {$menu_str}
+        </tbody>
+    </table>
+  </form>
+</div>
+</body>
+</html>
